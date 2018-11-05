@@ -7,13 +7,12 @@
     android:orientation="vertical"
     android:gravity="center"
     tools:context=".MainActivity">
-
+    
     <Button
         android:id="@+id/btn_newProject"
         android:layout_width="120dp"
         android:layout_height="50dp"
-        android:text="새 프로젝트"
-        android:onClick="goToWorkingSpace"/>
+        android:text="새 프로젝트"/>
     <Button
         android:id="@+id/btn_openProject"
         android:layout_width="120dp"
