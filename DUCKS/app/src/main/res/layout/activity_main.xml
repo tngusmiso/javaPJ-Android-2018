@@ -4,45 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <HorizontalScrollView
-        android:id="@+id/svMenu"
+    <LinearLayout
+        android:id="@+id/topMenuContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scrollbars="none">
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/btMypage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="mypage" />
-
-            <Button
-                android:id="@+id/btSchedule"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/btMypage"
-                android:text="schedule" />
-
-            <Button
-                android:id="@+id/btTicketing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/btSchedule"
-                android:text="ticketing" />
-
-            <Button
-                android:id="@+id/btNanum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/btTicketing"
-                android:text="Nanum" />
-        </LinearLayout>
-
-    </HorizontalScrollView>
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -58,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="HOT STAR" />
+                android:text="HOT DUCK" />
 
             <HorizontalScrollView
                 android:id="@+id/svHotStar"
@@ -98,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/svHotStar"
                 android:layout_margin="10dp"
-                android:text="SCHEDULE" />
+                android:text="다가오는 일정" />
 
             <LinearLayout
                 android:id="@+id/llSchedule"

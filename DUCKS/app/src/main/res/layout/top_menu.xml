@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <HorizontalScrollView
+        android:id="@+id/svMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="home" />
+
+            <Button
+                android:id="@+id/btMypage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="mypage" />
+
+            <Button
+                android:id="@+id/btSchedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/btMypage"
+                android:text="schedule" />
+
+            <Button
+                android:id="@+id/btTicketing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/btSchedule"
+                android:text="ticketing" />
+
+            <Button
+                android:id="@+id/btNanum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/btTicketing"
+                android:text="Nanum" />
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+</LinearLayout>
