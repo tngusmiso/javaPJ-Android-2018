@@ -1,22 +1,19 @@
 package cse.moblie.ducks;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MyPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_my_page);
 
         // 상단앱바 설정
         RelativeLayout topBar = findViewById(R.id.rlTopBar);
@@ -45,16 +42,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"Search", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        // 마이페이지
-        Button btMyPage = findViewById(R.id.btMypage);
-        btMyPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MyPage.class);
-                startActivity(intent);
             }
         });
     }
