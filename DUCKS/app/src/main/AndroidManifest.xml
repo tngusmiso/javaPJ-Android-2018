@@ -16,7 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MyPage"></activity>
+        <activity android:name=".MyPage" />
+        <activity android:name=".MyDuck" />
+        <activity android:name=".Schedule" />
+        <activity android:name=".Sharing"></activity>
     </application>
 
 </manifest>

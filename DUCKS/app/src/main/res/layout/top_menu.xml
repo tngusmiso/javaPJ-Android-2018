@@ -17,34 +17,35 @@
                 android:id="@+id/btHome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="home" />
+                android:text="HOME" />
+
+            <Button
+                android:id="@+id/btMyDuck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/btHome"
+                android:text="MY/nDUCK" />
 
             <Button
                 android:id="@+id/btMypage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="mypage" />
+                android:layout_toRightOf="@id/btMyDuck"
+                android:text="MY/nPAGE" />
 
             <Button
                 android:id="@+id/btSchedule"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/btMypage"
-                android:text="schedule" />
-
-            <Button
-                android:id="@+id/btTicketing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/btSchedule"
-                android:text="ticketing" />
+                android:text="스케줄/n일정" />
 
             <Button
                 android:id="@+id/btNanum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/btTicketing"
-                android:text="Nanum" />
+                android:layout_toRightOf="@id/btSchedule"
+                android:text="양도/n나눔" />
         </LinearLayout>
 
     </HorizontalScrollView>

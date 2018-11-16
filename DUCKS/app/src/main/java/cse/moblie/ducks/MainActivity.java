@@ -48,6 +48,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        // 마이덕
+        Button btMyDuck = findViewById(R.id.btMyDuck);
+        btMyDuck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyDuck.class);
+                startActivity(intent);
+            }
+        });
         // 마이페이지
         Button btMyPage = findViewById(R.id.btMypage);
         btMyPage.setOnClickListener(new View.OnClickListener() {
@@ -57,5 +67,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        // 스케줄
+        Button btSchedule = findViewById(R.id.btSchedule);
+        btSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Schedule.class);
+                startActivity(intent);
+            }
+        });
+        // 양도 나눔
+        Button btNanum = findViewById(R.id.btNanum);
+        btNanum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Sharing.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
