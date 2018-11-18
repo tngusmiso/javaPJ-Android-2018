@@ -1,6 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivDuckPic"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
+                android:background="@color/colorPrimaryDark" />
+
+            <TextView
+                android:id="@+id/tvDuckName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivDuckPic"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="Duck name"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDuckFollowers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvDuckName"
+                android:layout_centerHorizontal="true"
+                android:text="123,456덕" />
+
+
+            <TextView
+                android:id="@+id/tvLine1"
+                android:layout_width="300dp"
+                android:layout_height="5dp"
+                android:layout_below="@id/tvDuckFollowers"
+                android:layout_centerHorizontal="true"
+                android:layout_marginVertical="20dp"
+                android:background="#000000" />
+
+            <RelativeLayout
+                android:id="@+id/rlMembers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvLine1"
+                android:layout_centerHorizontal="true" >
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="디오, 레이, 백현, 세훈, 수호, 시우민, 찬열, 첸, 카이"
+                    android:textAlignment="center"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvLine2"
+                android:layout_width="300dp"
+                android:layout_height="5dp"
+                android:layout_below="@id/rlMembers"
+                android:layout_centerHorizontal="true"
+                android:layout_marginVertical="20dp"
+                android:background="#000000"/>
+
+            <TextView
+                android:id="@+id/tvHomePage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvLine2"
+                android:layout_margin="10dp"
+                android:text="HOMEPAGE"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvLine2"
+                android:layout_margin="10dp"
+                android:layout_toRightOf="@id/tvHomePage"
+                android:autoLink="web"
+                android:linksClickable="true"
+                android:text="http://exo.smtown.com" />
+
+            <TextView
+                android:id="@+id/tvWeekSchedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvHomePage"
+                android:layout_margin="10dp"
+                android:text="이번 주 스케줄"
+                android:textStyle="bold" />
+
+            <GridView
+                android:id="@+id/gvWeekCalendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvWeekSchedule">
+
+            </GridView>
+
+            <TextView
+                android:id="@+id/tvSharingBoard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gvWeekCalendar"
+                android:layout_margin="10dp"
+                android:text="양도 나눔 글"
+                android:textStyle="bold" />
+
+            <FrameLayout
+                android:id="@+id/flSharingBoard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tvSharingBoard">
+
+            </FrameLayout>
+
+        </RelativeLayout>
+    </ScrollView>
 </FrameLayout>
