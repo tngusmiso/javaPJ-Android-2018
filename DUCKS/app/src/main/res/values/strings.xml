@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">DUCKS</string>
+    <string name="home">HOME</string>
+    <string name="duck">MY\nDUCK</string>
+    <string name="my_page">MY\nPAGE</string>
+    <string name="schedule">스케줄\n일정</string>
+    <string name="sharing">양도\n나눔</string>
 </resources>
+

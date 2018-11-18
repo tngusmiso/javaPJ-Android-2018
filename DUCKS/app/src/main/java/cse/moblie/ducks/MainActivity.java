@@ -1,6 +1,8 @@
 package cse.moblie.ducks;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -19,6 +22,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final int FRAG_MY = 3;
     private final int FRAG_SCHD = 4;
     private final int FRAG_SHAR = 5;
+
+
+    // 위젯에 대한 참조
+    TextView btHome;
+    TextView btMyDuck;
+    TextView btMyPage;
+    TextView btSchedule;
+    TextView btSharing;
 
     private Button bt_tab1, bt_tab2;
 
@@ -57,12 +68,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        // 위젯에 대한 참조
-        Button btHome = findViewById(R.id.btHome);
-        Button btMyDuck = findViewById(R.id.btMyDuck);
-        Button btMyPage = findViewById(R.id.btMypage);
-        Button btSchedule = findViewById(R.id.btSchedule);
-        Button btSharing = findViewById(R.id.btSharing);
+        btHome = findViewById(R.id.btHome);
+        btMyDuck = findViewById(R.id.btMyDuck);
+        btMyPage = findViewById(R.id.btMypage);
+        btSchedule = findViewById(R.id.btSchedule);
+        btSharing = findViewById(R.id.btSharing);
 
         // 탭 버튼에 대한 리스너 연결
         btHome.setOnClickListener(this);
@@ -72,29 +82,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btSharing.setOnClickListener(this);
 
         // 임의로 액티비티 호출 시점에 어느 프레그먼트를 프레임레이아웃에 띄울 것인지를 정함
-        callFragment(FRAG_MY);
+        callFragment(FRAG_HOME);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btHome :
+                textColorClicked(btHome);
+                textColorUnclicked(btMyDuck);
+                textColorUnclicked(btMyPage);
+                textColorUnclicked(btSchedule);
+                textColorUnclicked(btSharing);
                 callFragment(FRAG_HOME);
                 break;
 
             case R.id.btMyDuck :
+                textColorUnclicked(btHome);
+                textColorClicked(btMyDuck);
+                textColorUnclicked(btMyPage);
+                textColorUnclicked(btSchedule);
+                textColorUnclicked(btSharing);
                 callFragment(FRAG_DUCK);
                 break;
 
             case R.id.btMypage :
+                textColorUnclicked(btHome);
+                textColorUnclicked(btMyDuck);
+                textColorClicked(btMyPage);
+                textColorUnclicked(btSchedule);
+                textColorUnclicked(btSharing);
                 callFragment(FRAG_MY);
                 break;
 
             case R.id.btSchedule :
+                textColorUnclicked(btHome);
+                textColorUnclicked(btMyDuck);
+                textColorUnclicked(btMyPage);
+                textColorClicked(btSchedule);
+                textColorUnclicked(btSharing);
                 callFragment(FRAG_SCHD);
                 break;
 
             case R.id.btSharing :
+                textColorUnclicked(btHome);
+                textColorUnclicked(btMyDuck);
+                textColorUnclicked(btMyPage);
+                textColorUnclicked(btSchedule);
+                textColorClicked(btSharing);
                 callFragment(FRAG_SHAR);
                 break;
         }
@@ -137,6 +172,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
 
+    }
+
+    private void textColorClicked(TextView v){
+        v.setTextColor(Color.parseColor("#EE8255"));
+    }
+    private void textColorUnclicked(TextView v){
+        v.setTextColor(Color.parseColor("#999999"));
     }
 
 }
