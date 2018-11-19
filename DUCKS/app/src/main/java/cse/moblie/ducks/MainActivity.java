@@ -3,6 +3,7 @@ package cse.moblie.ducks;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -48,19 +50,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         inflater.inflate(R.layout.top_menu, menuCont);
 
         // 메뉴버튼
-        Button btMenu = findViewById(R.id.btSide);
+        final ImageButton btMenu = findViewById(R.id.btSide);
         btMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RelativeLayout rlTopMenu = findViewById(R.id.rlTopMenu);
                 if (rlTopMenu.getVisibility() == View.GONE) {
                     rlTopMenu.setVisibility(View.VISIBLE);
-                } else rlTopMenu.setVisibility(View.GONE);
+                    btMenu.setBackgroundResource(R.drawable.up);
+                } else {
+                    rlTopMenu.setVisibility(View.GONE);
+                    btMenu.setBackgroundResource(R.drawable.down);
+                }
+
             };
         });
 
         // 검색버튼
-        Button btSearch = findViewById(R.id.btSearch);
+        ImageButton btSearch = findViewById(R.id.btSearch);
         btSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
