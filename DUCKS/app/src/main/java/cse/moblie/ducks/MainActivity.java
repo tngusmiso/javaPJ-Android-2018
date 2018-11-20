@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         // 상단앱바 설정
         RelativeLayout topBar = findViewById(R.id.rlTopBar);
         LayoutInflater inflater = getLayoutInflater();
