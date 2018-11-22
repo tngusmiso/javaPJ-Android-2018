@@ -28,14 +28,14 @@
                         android:id="@+id/ivMyPic"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:background="@color/colorPrimaryDark" />
+                        android:src="@drawable/my_pic"/>
 
                     <TextView
                         android:id="@+id/tvNickname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="My nickname"
+                        android:text="MY NAME"
                         android:textSize="20dp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -63,14 +63,14 @@
                         android:id="@+id/ivDuckPic"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:background="@color/colorPrimaryDark" />
+                        android:src="@drawable/duck"/>
 
                     <TextView
                         android:id="@+id/tvDuckName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="Duck name"
+                        android:text="EXO"
                         android:textSize="20dp"
                         android:textStyle="bold" />
 

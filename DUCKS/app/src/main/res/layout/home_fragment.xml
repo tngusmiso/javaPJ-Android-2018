@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ScrollView
         android:id="@+id/svHome"
-        android:layout_below="@id/rlTopMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/rlTopMenu"
         android:scrollbars="none">
 
         <RelativeLayout
@@ -18,7 +19,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="HOT DUCK" />
+                android:text="HOT DUCK"
+                android:textSize="15dp"
+                android:textStyle="bold" />
 
             <HorizontalScrollView
                 android:id="@+id/svHotStar"
@@ -33,21 +36,24 @@
 
                     <ImageButton
                         android:id="@+id/ibtHot1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_launcher_foreground" />
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/exo" />
 
                     <ImageButton
                         android:id="@+id/ibtHot2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_launcher_foreground" />
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/straykids" />
 
                     <ImageButton
                         android:id="@+id/ibtHot3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_launcher_foreground" />
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/iu" />
 
                 </LinearLayout>
             </HorizontalScrollView>
@@ -58,7 +64,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/svHotStar"
                 android:layout_margin="10dp"
-                android:text="다가오는 일정" />
+                android:paddingTop="25dp"
+                android:text="다가오는 일정"
+                android:textSize="15dp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/llSchedule"

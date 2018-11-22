@@ -1,4 +1,4 @@
-package cse.moblie.ducks;
+package cse.moblie.ducks.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +12,7 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.util.Calendar;
 
+import cse.moblie.ducks.R;
 import cse.moblie.ducks.decorator.SaturdayDecorator;
 import cse.moblie.ducks.decorator.SundayDecorator;
 import cse.moblie.ducks.decorator.TodayDecorator;

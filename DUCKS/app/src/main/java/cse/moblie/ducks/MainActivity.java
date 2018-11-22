@@ -2,21 +2,22 @@ package cse.moblie.ducks;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import cse.moblie.ducks.fragment.FragmentHome;
+import cse.moblie.ducks.fragment.FragmentMyDuck;
+import cse.moblie.ducks.fragment.FragmentMyPage;
+import cse.moblie.ducks.fragment.FragmentSchedule;
+import cse.moblie.ducks.fragment.FragmentSharing;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private final int FRAG_HOME = 1;
@@ -68,11 +69,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         // 검색버튼
-        ImageButton btSearch = findViewById(R.id.btSearch);
-        btSearch.setOnClickListener(new View.OnClickListener() {
+        Button btLogin = findViewById(R.id.btLogin);
+        btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Search", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
             }
         });
 

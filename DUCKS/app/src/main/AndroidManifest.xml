@@ -19,7 +19,9 @@
         <activity android:name=".MyPage" />
         <activity android:name=".MyDuck" />
         <activity android:name=".Schedule" />
-        <activity android:name=".Sharing"></activity>
+        <activity android:name=".Sharing" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity"></activity>
     </application>
 
 </manifest>

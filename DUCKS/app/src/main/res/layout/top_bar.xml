@@ -20,11 +20,11 @@
         android:layout_marginTop="10dp"
         android:src="@drawable/logo"/>
 
-    <ImageButton
-        android:id="@+id/btSearch"
-        android:layout_width="50dp"
+    <Button
+        android:id="@+id/btLogin"
+        android:layout_width="80dp"
         android:layout_height="50dp"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
-        android:background="@drawable/search" />
+        android:text="로그인"/>
 </RelativeLayout>

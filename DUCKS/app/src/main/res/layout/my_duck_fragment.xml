@@ -17,7 +17,7 @@
                 android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="10dp"
-                android:background="@color/colorPrimaryDark" />
+                android:src="@drawable/duck"/>
 
             <TextView
                 android:id="@+id/tvDuckName"
@@ -26,7 +26,7 @@
                 android:layout_below="@id/ivDuckPic"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
-                android:text="Duck name"
+                android:text="EXO"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
