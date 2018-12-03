@@ -1,9 +1,9 @@
 <?php
-  $connect = require_once('dbcon.php');
+  $connect = mysqli_connect("localhost", "root", "k1jjang", "DUCK");
   
   $Id=$_GET['ID'];    //url 뒤에 받아온 값
   
-  $sql="SELECT * from USER";  // Id가 받아온 값인 것을 셀렉트하라는 sql문
+  $sql="SELECT * from USER"; 
   $result = mysqli_query($connect,$sql);
   
   $D_row=array(); //배열 생성
