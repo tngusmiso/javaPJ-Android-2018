@@ -5,10 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import cse.moblie.ducks.fragment.FragmentSchedule;
 
@@ -18,7 +18,7 @@ import cse.moblie.ducks.fragment.FragmentSchedule;
 
 public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHolder> {
 
-    private ArrayList<FragmentSchedule.item> mDataset; //FragmentSchedule에 item class를 정의해 놓았음
+    private ArrayList<FragmentSchedule.item> scheduleList; //FragmentSchedule에 item class를 정의해 놓았음
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -43,8 +43,8 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
     }
 
     // 생성자 - 넘어 오는 데이터파입에 유의해야 한다.
-    public CardviewAdapter(ArrayList<FragmentSchedule.item> myDataset) {
-        mDataset = myDataset;
+    public CardviewAdapter(ArrayList<FragmentSchedule.item> scheduleList) {
+        this.scheduleList = scheduleList;
     }
 
 
@@ -65,15 +65,15 @@ public class CardviewAdapter extends RecyclerView.Adapter<CardviewAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.tvMonth.setText(mDataset.get(position).getMonth());
-        holder.tvDate.setText(mDataset.get(position).getDate());
-        holder.tvTime.setText(mDataset.get(position).getTime());
-        holder.tvLocation.setText(mDataset.get(position).getLocation());
-        holder.tvTitle.setText(mDataset.get(position).getTitle());
+        holder.tvMonth.setText(scheduleList.get(position).getMonth());
+        holder.tvDate.setText(scheduleList.get(position).getDate());
+        holder.tvTime.setText(scheduleList.get(position).getTime());
+        holder.tvLocation.setText(scheduleList.get(position).getLocation());
+        holder.tvTitle.setText(scheduleList.get(position).getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return mDataset.size();
+        return scheduleList.size();
     }
 }

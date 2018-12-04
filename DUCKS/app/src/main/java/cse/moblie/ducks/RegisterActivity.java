@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -14,6 +16,15 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        EditText etNickname = findViewById(R.id.etNickname);
+        EditText etID = findViewById(R.id.etID);
+        EditText etPwd = findViewById(R.id.etPwd);
+        EditText etPwdCheck = findViewById(R.id.etPwdCheck);
+        EditText etEmail = findViewById(R.id.etEmail);
+        Spinner spinner1 = findViewById(R.id.spinner1);
+        Spinner spinner2 = findViewById(R.id.spinner2);
+        Spinner spinner3 = findViewById(R.id.spinner3);
 
         Button btRegister = findViewById(R.id.btRegister);
         btRegister.setOnClickListener(new View.OnClickListener() {

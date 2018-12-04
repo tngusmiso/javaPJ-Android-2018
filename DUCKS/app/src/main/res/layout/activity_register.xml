@@ -8,14 +8,12 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true">
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true">
 
             <TextView
@@ -115,11 +113,65 @@
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
+
+            <TextView
+                android:id="@+id/tvCategory"
+                android:layout_below="@id/tvMyduck"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="분류"/>
+
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_toRightOf="@id/tvCategory"
+                android:layout_below="@id/tvMyduck"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content">
+
+            </Spinner>
+            <TextView
+                android:id="@+id/tvGroup"
+                android:layout_below="@id/tvCategory"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="분류"/>
+
+            <Spinner
+                android:id="@+id/spinner2"
+                android:layout_toRightOf="@id/tvGroup"
+                android:layout_below="@id/tvCategory"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content">
+
+            </Spinner>
+            <TextView
+                android:id="@+id/tvSubGroup"
+                android:layout_below="@id/tvGroup"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="분류"/>
+
+            <Spinner
+                android:id="@+id/spinner3"
+                android:layout_toRightOf="@id/tvSubGroup"
+                android:layout_below="@id/tvGroup"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content">
+
+            </Spinner>
+
+
             <TextView
                 android:id="@+id/tvInterests"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/rlMyduck"
+                android:layout_below="@id/tvSubGroup"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="40dp"
                 android:text="내 관심사"
@@ -136,110 +188,8 @@
                 android:orientation="horizontal"
                 android:layout_marginHorizontal="10dp">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/tvCategory"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:gravity="center"
-                        android:text="분류" />
-
-                    <ScrollView
-                        android:id="@+id/sv1"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_below="@id/tvCategory"
-                        android:layout_margin="10dp"
-                        android:background="@color/colorPrimaryDark">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <ListView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                            </ListView>
-                        </RelativeLayout>
-                    </ScrollView>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/tvGroup"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:gravity="center"
-                        android:text="상위그룹" />
-
-                    <ScrollView
-                        android:id="@+id/sv2"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_below="@id/tvGroup"
-                        android:layout_margin="10dp"
-                        android:background="@color/colorPrimaryDark">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <ListView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                            </ListView>
-                        </RelativeLayout>
-                    </ScrollView>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
 
 
-                    <TextView
-                        android:id="@+id/tvSubGroup"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:gravity="center"
-                        android:text="하위그룹" />
-
-
-                    <ScrollView
-                        android:id="@+id/sv3"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_below="@id/tvSubGroup"
-                        android:layout_margin="10dp"
-                        android:background="@color/colorPrimaryDark">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <ListView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                            </ListView>
-                        </RelativeLayout>
-                    </ScrollView>
-
-                </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout

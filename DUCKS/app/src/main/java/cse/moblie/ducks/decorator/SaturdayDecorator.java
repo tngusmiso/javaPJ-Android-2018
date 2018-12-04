@@ -19,8 +19,10 @@ public class SaturdayDecorator implements DayViewDecorator {
     @Override
     public boolean shouldDecorate(CalendarDay day) {
         day.copyTo(calendar);
-        int weekDay = calendar.get(Calendar.DAY_OF_WEEK);
-        return weekDay == Calendar.SATURDAY;
+        if(calendar.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY)
+            return true;
+        else
+            return false;
     }
 
     @Override
