@@ -76,17 +76,24 @@
                 android:layout_below="@id/tvSchedule"
                 android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/ibtSch1"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_launcher_foreground" />
 
-                <ImageButton
-                    android:id="@+id/ibtSch2"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/home_schedule_cardview"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_launcher_foreground" />
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+                <!--<ImageButton-->
+                    <!--android:id="@+id/ibtSch1"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="100dp"-->
+                    <!--android:src="@drawable/ic_launcher_foreground" />-->
+
+                <!--<ImageButton-->
+                    <!--android:id="@+id/ibtSch2"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="100dp"-->
+                    <!--android:src="@drawable/ic_launcher_foreground" />-->
 
             </LinearLayout>
 
