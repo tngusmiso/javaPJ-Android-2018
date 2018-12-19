@@ -4,21 +4,34 @@ import android.graphics.Bitmap;
 
 public class ScheduleItem {
 
-    String month;
-    String date;
-    String startTime;
-    String endTime;
-    String title;
-    String address;
+    int Type;
 
-    public ScheduleItem(String month, String date, String startTime, String endTime, String title, String address) {
+    String month;       //writer
+    String date;        //writtenDate
+    String startTime;   //writtenTime
+    String endTime;     //dueTime
+    String title;       //title
+    String address;     //content
+
+    String duck;
+    int comments;
+
+    public ScheduleItem(int Type, String month, String date, String startTime, String endTime, String title, String address, String duck, int comments) {
+        this.Type = Type;
         this.month = month;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.title = title;
         this.address = address;
+        this.duck = duck;
+        this.comments = comments;
     }
+
+
+    public int getType() {return Type;}
+
+    public void setType(int Type) { this.Type = Type;}
 
     public String getMonth() {
         return month;
@@ -53,5 +66,15 @@ public class ScheduleItem {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public String getDuck() { return duck;}
+
+    public void setDuck(String duck) {
+        this.duck = duck;
+    }
+
+    public int getComments() {return comments;}
+
+    public void setComments(int comments) { this.comments = comments;}
 
 }

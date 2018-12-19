@@ -19,7 +19,7 @@ import cse.moblie.ducks.R;
 import cse.moblie.ducks.decorator.SaturdayDecorator;
 import cse.moblie.ducks.decorator.SundayDecorator;
 import cse.moblie.ducks.decorator.TodayDecorator;
-import cse.moblie.ducks.recycler.ScheduleAdapter;
+import cse.moblie.ducks.recycler.CardAdapter;
 
 public class FragmentSchedule extends Fragment {
 

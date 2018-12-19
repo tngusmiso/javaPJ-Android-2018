@@ -7,64 +7,88 @@
     android:elevation="10dp"
     card_view:cardCornerRadius="4dp"
     card_view:cardUseCompatPadding="true">
+
     <RelativeLayout
+        android:id="@+id/rlSharingCardview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="15dp">
-        <TextView
-            android:id="@+id/tvWriter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="8dp"
-            android:text="작성자"/>
-        <TextView
-            android:id="@+id/tvWrittenDate"
-            android:layout_below="@id/tvWriter"
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="8dp"
-            android:text="2018.12.19"/>
-        <TextView
-            android:id="@+id/tvWrittenTime"
-            android:layout_below="@id/tvWrittenDate"
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="8dp"
-            android:text="16:35"/>
+
         <TextView
             android:id="@+id/tvWhichDuck"
-            android:layout_below="@id/tvWriter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:textSize="20dp"
-            android:textStyle="bold"
+            android:text="EXO"
             android:textColor="@color/colorPrimaryDark"
-            android:text="EXO"/>
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/tvEachTitle"
-            android:layout_toRightOf="@id/tvWhichDuck"
-            android:layout_below="@id/tvWriter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tvWhichDuck"
+            android:layout_toLeftOf="@id/rlWriter"
+            android:text="글제목"
             android:textSize="20dp"
-            android:textStyle="bold"
-            android:text="글제목"/>
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/rlWriter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:id="@+id/tvWriter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="작성자"
+                android:textSize="8dp" />
+
+            <TextView
+                android:id="@+id/tvWrittenDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvWriter"
+                android:text="2018.12.19"
+                android:textSize="8dp" />
+
+            <TextView
+                android:id="@+id/tvWrittenTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvWrittenDate"
+                android:text="16:35"
+                android:textSize="8dp" />
+        </RelativeLayout>
+
         <TextView
             android:id="@+id/tvDueTime"
-            android:layout_below="@id/tvEachTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="마감 : 2019.1.10"/>
+            android:layout_below="@id/tvEachTitle"
+            android:text="마감 : 2019.1.10" />
+
         <TextView
             android:id="@+id/tvEachContent"
-            android:layout_below="@id/tvDueTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10dp"
-            android:text="글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용"/>
+            android:layout_below="@id/tvDueTime"
+            android:layout_marginTop="10dp"
+            android:text="글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용"
+            android:textSize="10dp" />
+
+        <Button
+            android:id="@+id/btComments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tvEachContent"
+            android:background="#00000000"
+            android:text="댓글보기(8)"
+            android:textColor="#555555" />
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>
