@@ -10,11 +10,10 @@
         android:layout_below="@id/rlTopMenu"
         android:scrollbars="none">
 
-        <LinearLayout
-            android:id="@+id/rlSharingBoard"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
+
             <TextView
                 android:id="@+id/tvBoardTitle"
                 android:layout_width="match_parent"
@@ -24,13 +23,28 @@
                 android:text="양도/나눔 게시판"
                 android:textSize="15dp"
                 android:textStyle="bold" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvSharing"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btAdd"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/calendarView" />
+                android:text="글쓰기"
+                android:textSize="10dp"/>
 
-        </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/rlSharingBoard"
+                android:layout_below="@id/btAdd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_marginTop="15dp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvSharing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/calendarView" />
+            </RelativeLayout>
+        </RelativeLayout>
     </ScrollView>
 </FrameLayout>

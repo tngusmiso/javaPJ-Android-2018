@@ -28,8 +28,8 @@ public class TodayDecorator implements DayViewDecorator {
     @Override
     public void decorate(DayViewFacade view) {
         view.addSpan(new StyleSpan(Typeface.BOLD));
-        view.addSpan(new RelativeSizeSpan(1.4f));
-        view.addSpan(new ForegroundColorSpan(Color.YELLOW));
+        view.addSpan(new RelativeSizeSpan(1.5f));
+        view.addSpan(new ForegroundColorSpan(Color.parseColor("#348B0D")));
     }
 
     public void setDate(Date date) {
