@@ -29,40 +29,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvWhichDuck"
-            android:layout_toLeftOf="@id/rlWriter"
             android:text="글제목"
             android:textSize="20dp"
             android:textStyle="bold" />
 
-        <RelativeLayout
-            android:id="@+id/rlWriter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true">
-
-            <TextView
-                android:id="@+id/tvWriter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="작성자"
-                android:textSize="8dp" />
-
-            <TextView
-                android:id="@+id/tvWrittenDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvWriter"
-                android:text="2018.12.19"
-                android:textSize="8dp" />
-
-            <TextView
-                android:id="@+id/tvWrittenTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvWrittenDate"
-                android:text="16:35"
-                android:textSize="8dp" />
-        </RelativeLayout>
 
         <TextView
             android:id="@+id/tvDueTime"
@@ -80,6 +50,39 @@
             android:text="글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용"
             android:textSize="10dp" />
 
+        <RelativeLayout
+            android:id="@+id/rlWriter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvEachContent"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/tvWriter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="작성자"
+                android:textSize="8dp" />
+
+            <TextView
+                android:id="@+id/tvWrittenDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvWriter"
+                android:text="2018.12.19"
+                android:textSize="8dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvWrittenTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvWriter"
+                android:layout_toRightOf="@id/tvWrittenDate"
+                android:layout_marginLeft="5dp"
+                android:text="16:35"
+                android:textSize="8dp" />
+        </RelativeLayout>
         <Button
             android:id="@+id/btComments"
             android:layout_width="wrap_content"
