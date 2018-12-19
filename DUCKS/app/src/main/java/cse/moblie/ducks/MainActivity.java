@@ -3,6 +3,7 @@ package cse.moblie.ducks;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.StrictMode;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final int FRAG_MY = 3;
     private final int FRAG_SCHD = 4;
     private final int FRAG_SHAR = 5;
+
+    public final int REQUEST_ADDSHR = 1;
 
 
     // 위젯에 대한 참조

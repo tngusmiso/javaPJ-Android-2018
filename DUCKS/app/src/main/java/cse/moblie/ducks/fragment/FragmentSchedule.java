@@ -75,6 +75,4 @@ public class FragmentSchedule extends Fragment {
         scheduleAdapter.notifyDataSetChanged();
         return view;
     }
-
-
 }

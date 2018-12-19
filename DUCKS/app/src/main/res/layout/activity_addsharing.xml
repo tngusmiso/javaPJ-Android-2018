@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <Button
+        android:id="@+id/btCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="취소" />
+    <ImageView
+        android:id="@+id/tvAppName"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/logo" />
+    <Button
+        android:id="@+id/btDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="완료" />
+
+    <RelativeLayout
+        android:id="@+id/rlAddSharing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tvAppName">
+
+        <TextView
+            android:id="@+id/tvSharing1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:text="양도 / 나눔 글쓰기"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+
+        <Spinner
+            android:id="@+id/spParent"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvSharing1"
+            android:tooltipText="분류 선택"></Spinner>
+
+
+        <Spinner
+            android:id="@+id/spChild"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvSharing1"
+            android:layout_toRightOf="@id/spParent"
+            android:tooltipText="분류 선택"></Spinner>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/spParent"
+            android:layout_margin="10dp"
+            android:text="제목" />
+
+        <EditText
+            android:id="@+id/etTitle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/spParent"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@id/tvTitle"
+            android:background="@drawable/textbox"
+            android:hint="제목"
+            android:padding="10dp" />
+
+        <EditText
+            android:id="@+id/etContent"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/etTitle"
+            android:layout_margin="10dp"
+            android:background="@drawable/textbox"
+            android:hint="내용 (300자 제한)"
+            android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/tvDueDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etContent"
+            android:layout_margin="10dp"
+            android:text="마감일"/>
+
+        <Button
+            android:id="@+id/btDueDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etContent"
+            android:layout_toRightOf="@id/tvDueDate"
+            android:text="마감일 선택"/>
+
+    </RelativeLayout>
+</RelativeLayout>
