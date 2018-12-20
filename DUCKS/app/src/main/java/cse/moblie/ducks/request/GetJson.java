@@ -27,13 +27,15 @@ public class GetJson {
      * 웹 서버로 요청을 한다.
      */
     public void requestWebServer(Callback callback, String php, String... param) {
-        String url = server + php + "?";
+        String url = server + php;
+
+        if (param.length > 0) url += "?";
 
         for (String s : param) {
             url += s + "&";
         }
 
-        Log.d("URL",url);
+        Log.d("URL", url);
         RequestBody body = new FormBody.Builder()
                 .build();
         Request request = new Request.Builder()
