@@ -1,31 +1,35 @@
 <?php
-    $con = mysqli_connect("localhost","root","k1jjang","DUCK");
 
-    $id = $_POST["u_id"];
-    $pwd = $_POST["u_pwd"];
-    $name = $_POST["u_name"];
-    $email = $_POST["u_email"];
-    $duck_type = $_POST["duck_type"];
-    $duck_no = $_POST["duck_no"];
+    $Id = $_GET['ID']; 
+    $Pw = $_GET['PWD']; 
+    $Name = $_GET['NAME']; 
+    $Email = $_GET['EMAIL'];
+    $Type = $_GET['TYPE']; 
+    $Duck = $_GET['DUCK']; 
+    $Interest1 = $_GET['I1']; 
+    $Interest2 = $_GET['I2']; 
+    $Interest3 = $_GET['I3']; 
     
     
-    $sql = "INSERT INTO USER (
-                u_id, 
-                u_pwd, 
-                u_name, 
-                u_email, 
-                duck_type, 
-                duck_no
-            ) VALUES (
-                '$u_id',
-                '$u_pwd',
-                '$u_name',
-                '$u_email',
-                '$duck_type',
-                '$duck_no')";
+    require_once('dbcon.php');
 
-    $result = mysqli_query($con, $sql);
-    if($result === false){
-        echo mysqli_error($con);
+    $sql = "SELECT * FROM USER WHERE u_id = '$Id'";
+    $res =mysqli_query($con,$sql);
+
+    if($res->num_rows ===0){ 
+        $sql="INSERT INTO USER (u_id, u_pwd, u_name, u_email, duck_type, duck_no, u_interest1, u_interest2, u_interest3) 
+            Values ('$Id','$Pw','$Name','$Email','$Type','$Duck','$Interest1','$Interest2','$Interest3')";
+        
+        if(mysqli_query($con,$sql))
+            $result= array("result" => "100");//100이면 로그인 성공
+        else
+            $result= array("result" => "50"); // 50이면 db 삽입 실패
     }
-?>
+    else
+        $result= array("result" => "10");//10이면 ID 중복
+    
+    $output=json_encode($result);
+    echo urldecode($output);
+    mysqli_close($con);
+
+ ?>
