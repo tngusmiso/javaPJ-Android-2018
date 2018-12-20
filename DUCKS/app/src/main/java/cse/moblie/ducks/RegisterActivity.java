@@ -1,5 +1,6 @@
 package cse.moblie.ducks;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,7 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import cse.moblie.ducks.request.GetJson;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -28,23 +33,48 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText etPwdCheck = findViewById(R.id.etPwdCheck);
         final EditText etEmail = findViewById(R.id.etEmail);
 
-        final GetJson json = GetJson.getInstance();
+        final GetJson httpConn = GetJson.getInstance();
         Spinner spinner1 = findViewById(R.id.spinner1);
         Spinner spinner2 = findViewById(R.id.spinner2);
         Spinner spinner3 = findViewById(R.id.spinner3);
+
 
         Button btRegister = (Button) findViewById(R.id.btRegister);
         btRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String id = etID.getText().toString();
-                String pwd = etPwd.getText().toString();
-                String name = etNickname.getText().toString();
-                String email = etEmail.getText().toString();
+                final String pwd = etPwd.getText().toString();
+                final String pwdCh = etPwdCheck.getText().toString();
+                if(pwd!=pwdCh){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                    builder.setTitle("비밀번호 확인")
+                            .setMessage("비밀번호가 다릅니다. 비밀번호를 다시 확인해주세요.")
+                            .setNegativeButton("확인",null)
+                            .show();
+                    return;
+                }
+                final String id = etID.getText().toString();
+                final String name = etNickname.getText().toString();
+                final String email = etEmail.getText().toString();
+                final String type = "";
+                final String duck = "";
+                final String inter1 = "";
+                final String inter2 = "";
+                final String inter3 = "";
 
                 new Thread() {
                     public void run() {
-                        json.requestWebServer("u_id", callback);
+                        String[] param1 = {"ID=", "PWD=", "NAME=", "EMAIL=", "TYPE=", "DUCK=", "I1=", "I2=", "I3="};
+                        String[] param2 = {id, pwd, name, email, type, duck, inter1, inter2, inter3};
+                        List<String> list = new ArrayList<>();
+
+                        for(int i = 0; i<param1.length;i++)
+                            if(!param2[i].equals(""))
+                                list.add(param1[i]+param2[i]);
+
+                        param1 = list.toArray(new String[list.size()]);
+
+                        httpConn.requestWebServer(callback, "register.php",param1);
                     }
                 }.start();
             }
@@ -74,13 +104,13 @@ public class RegisterActivity extends AppCompatActivity {
     private final Callback callback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
-            Log.d("", "콜백오류:" + e.getMessage());
+            Log.d("Register", "콜백오류:" + e.getMessage());
         }
 
         @Override
         public void onResponse(Call call, Response response) throws IOException {
             String body = response.body().string();
-            Log.d("", "서버에서 응답한 Body:" + body);
+            Log.d("Register", "서버에서 응답한 Body:" + body);
 
         }
     };
