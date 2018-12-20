@@ -1,5 +1,6 @@
 package cse.moblie.ducks;
 
+import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AlertDialog;
@@ -31,7 +32,9 @@ import okhttp3.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    boolean idCheck = false;
+    boolean usableID = false;
+
+    EditText etID;
 
     ArrayList<String> genreList = new ArrayList<>();
     ArrayList<String> duckList = new ArrayList<>();
@@ -51,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         final EditText etNickname = findViewById(R.id.etNickname);
-        final EditText etID = findViewById(R.id.etID);
+        etID = findViewById(R.id.etID);
         final EditText etPwd = findViewById(R.id.etPwd);
         final EditText etPwdCheck = findViewById(R.id.etPwdCheck);
         final EditText etEmail = findViewById(R.id.etEmail);
@@ -60,6 +63,18 @@ public class RegisterActivity extends AppCompatActivity {
         final Spinner spinner1 = findViewById(R.id.spinner1);
         final Spinner spinner2 = findViewById(R.id.spinner2);
         final Spinner spinner3 = findViewById(R.id.spinner3);
+
+        Button btIDCheck = (Button) findViewById(R.id.btCheck);
+        btIDCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Thread() {
+                    public void run() {
+                        httpConn.requestWebServer(idCallback, "idCheck.php", "ID=" + etID.getText().toString());
+                    }
+                }.start();
+            }
+        });
 
         genreAdapter = new ArrayAdapter<>(RegisterActivity.this, android.R.layout.simple_list_item_1, genreList);
         spinner1.setAdapter(genreAdapter);
@@ -111,19 +126,30 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
-        
+
         Button btRegister = (Button) findViewById(R.id.btRegister);
         btRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if(!idCheck){
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-//                    builder.setTitle("ID 확인")
-//                            .setMessage("ID 중복 확인을 먼저 해주세요.")
-//                            .setNegativeButton("확인",null)
-//                            .show();
-//                    return;
-//                }
+
+                if(!usableID){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                    builder.setTitle("ID 확인")
+                            .setMessage("ID 중복 확인을 먼저 해주세요.")
+                            .setNegativeButton("확인",null)
+                            .show();
+                    return;
+                }
+
+                if(etNickname.getText().toString().equals("")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                    builder.setTitle("Nickname 확인")
+                            .setMessage("Nickname을 입력해주세요.")
+                            .setNegativeButton("확인",null)
+                            .show();
+                    return;
+                }
+
                 final String pwd = etPwd.getText().toString();
                 final String pwdCh = etPwdCheck.getText().toString();
 
@@ -209,7 +235,47 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         public void onResponse(Call call, Response response) throws IOException {
             String body = response.body().string();
-            Log.d("Register", "서버에서 응답한 Body:" + body);
+            Log.d("Register", "회원가입 결과:" + body);
+
+            try {
+                JSONObject jsonObject = new JSONObject(body);
+                if(jsonObject.getString("result").equals("100")){
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                            builder.setTitle("DUCKS")
+                                    .setMessage("회원가입이 완료되었습니다.")
+                                    .setNegativeButton("확인", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            finish();
+                                        }
+                                    })
+                                    .show();
+                            return;
+                        }
+                    });
+                }else{
+                    usableID=false;
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                            builder.setTitle("ID 중복")
+                                    .setMessage("중복된 ID입니다. 다른 ID를 사용하세요.")
+                                    .setNegativeButton("확인", null)
+                                    .show();
+                            etID.setText("");
+                            return;
+                        }
+                    });
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         }
     };
@@ -313,20 +379,56 @@ public class RegisterActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+    };
 
+    private final Callback idCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            Log.d("ID check", "콜백오류:" + e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String body = response.body().string();
+            Log.d("ID check", "성공:" + body);
+
+            try {
+                JSONObject jsonObject = new JSONObject(body);
+                if(jsonObject.getString("result").equals("false")){
+                    usableID=true;
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                            builder.setTitle("ID 확인")
+                                    .setMessage("사용가능한 ID입니다.")
+                                    .setNegativeButton("확인", null)
+                                    .show();
+                            return;
+                        }
+                    });
+                }else{
+                    usableID=false;
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                            builder.setTitle("ID 중복")
+                                    .setMessage("중복된 ID입니다. 다른 ID를 사용하세요.")
+                                    .setNegativeButton("확인", null)
+                                    .show();
+                            etID.setText("");
+                            return;
+                        }
+                    });
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         }
     };
-//    private final Callback idCallback = new Callback() {
-//        @Override
-//        public void onFailure(Call call, IOException e) {
-//            Log.d("id check", "콜백오류:" + e.getMessage());
-//        }
-//
-//        @Override
-//        public void onResponse(Call call, Response response) throws IOException {
-//            String body = response.body().string();
-//            Log.d("id check", "서버에서 응답한 Body:" + body);
-//        }
-//    };
 }

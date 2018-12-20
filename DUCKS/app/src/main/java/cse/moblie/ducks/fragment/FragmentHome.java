@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import cse.moblie.ducks.MainActivity;
 import cse.moblie.ducks.R;
 import cse.moblie.ducks.recycler.CardAdapter;
 import cse.moblie.ducks.recycler.ScheduleItem;
@@ -47,6 +48,15 @@ public class FragmentHome extends Fragment {
         mRecycler_schedule.setAdapter(scheduleAdapter);
 
         scheduleAdapter.notifyDataSetChanged();
+
+        if(MainActivity.getLoginID()!=null&&!MainActivity.getLoginID().equals("")){
+            mRecycler_schedule.setVisibility(View.VISIBLE);
+            view.findViewById(R.id.tvUnsuableField).setVisibility(View.GONE);
+        }else {
+            mRecycler_schedule.setVisibility(View.GONE);
+            view.findViewById(R.id.tvUnsuableField).setVisibility(View.VISIBLE);
+        }
+
         return view;
     }
 

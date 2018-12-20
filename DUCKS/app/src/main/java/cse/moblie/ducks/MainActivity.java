@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public final int REQUEST_ADDSHR = 1;
 
+    private static String loginID = "";
+
 
     // 위젯에 대한 참조
     TextView btHome;
@@ -45,12 +47,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (android.os.Build.VERSION.SDK_INT > 9)
-        {
+        if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new
                     StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+
+        loginID = getIntent().getStringExtra("loginID");
+
         // 상단앱바 설정
         RelativeLayout topBar = findViewById(R.id.rlTopBar);
         LayoutInflater inflater = getLayoutInflater();
@@ -74,7 +78,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     btMenu.setBackgroundResource(R.drawable.down);
                 }
 
-            };
+            }
+
+            ;
         });
 
         // 검색버튼
@@ -82,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
@@ -106,8 +112,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btHome :
+        switch (v.getId()) {
+            case R.id.btHome:
                 textColorClicked(btHome);
                 textColorUnclicked(btMyDuck);
                 textColorUnclicked(btMyPage);
@@ -116,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 callFragment(FRAG_HOME);
                 break;
 
-            case R.id.btMyDuck :
+            case R.id.btMyDuck:
                 textColorUnclicked(btHome);
                 textColorClicked(btMyDuck);
                 textColorUnclicked(btMyPage);
@@ -125,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 callFragment(FRAG_DUCK);
                 break;
 
-            case R.id.btMypage :
+            case R.id.btMypage:
                 textColorUnclicked(btHome);
                 textColorUnclicked(btMyDuck);
                 textColorClicked(btMyPage);
@@ -134,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 callFragment(FRAG_MY);
                 break;
 
-            case R.id.btSchedule :
+            case R.id.btSchedule:
                 textColorUnclicked(btHome);
                 textColorUnclicked(btMyDuck);
                 textColorUnclicked(btMyPage);
@@ -143,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 callFragment(FRAG_SCHD);
                 break;
 
-            case R.id.btSharing :
+            case R.id.btSharing:
                 textColorUnclicked(btHome);
                 textColorUnclicked(btMyDuck);
                 textColorUnclicked(btMyPage);
@@ -154,12 +160,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void callFragment(int frament_no){
+    private void callFragment(int frament_no) {
 
         // 프래그먼트 사용을 위해
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        switch (frament_no){
+        switch (frament_no) {
             case 1:
                 FragmentHome f1 = new FragmentHome();
                 transaction.replace(R.id.flContainer, f1);
@@ -193,11 +199,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void textColorClicked(TextView v){
+    private void textColorClicked(TextView v) {
         v.setTextColor(Color.parseColor("#EE8255"));
     }
-    private void textColorUnclicked(TextView v){
+
+    private void textColorUnclicked(TextView v) {
         v.setTextColor(Color.parseColor("#999999"));
+    }
+
+    public static String getLoginID(){
+        return loginID;
     }
 
 }
