@@ -111,8 +111,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
-
-
+        
         Button btRegister = (Button) findViewById(R.id.btRegister);
         btRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,7 +126,8 @@ public class RegisterActivity extends AppCompatActivity {
 //                }
                 final String pwd = etPwd.getText().toString();
                 final String pwdCh = etPwdCheck.getText().toString();
-                if (pwd != pwdCh) {
+
+                if (!pwd.equals(pwdCh)) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                     builder.setTitle("비밀번호 확인")
                             .setMessage("비밀번호가 다릅니다. 비밀번호를 다시 확인해주세요.")
@@ -135,6 +135,16 @@ public class RegisterActivity extends AppCompatActivity {
                             .show();
                     return;
                 }
+
+                if(spinner2.getSelectedItemPosition()==0&&spinner3.getSelectedItemPosition()==0){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                    builder.setTitle("MY DUCK")
+                            .setMessage("마이덕을 선택해주세요.")
+                            .setNegativeButton("확인", null)
+                            .show();
+                    return;
+                }
+
                 final String id = etID.getText().toString();
                 final String name = etNickname.getText().toString();
                 final String email = etEmail.getText().toString();
@@ -203,6 +213,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         }
     };
+
     private final Callback genreCallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -239,6 +250,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         }
     };
+
     private final Callback duckCallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
