@@ -3,6 +3,7 @@ package cse.moblie.ducks;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
 
     String TAG = "LOGIN";
     EditText etId;
+    EditText etPwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         final GetJson httpConn = GetJson.getInstance();
 
         etId = findViewById(R.id.etID);
-        final EditText etPwd = findViewById(R.id.etPwd);
+        etPwd = findViewById(R.id.etPwd);
 
         Button btRegister = findViewById(R.id.btRegister);
         btRegister.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +53,15 @@ public class LoginActivity extends AppCompatActivity {
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(etId.getText().toString().equals("")||etPwd.getText().toString().equals("")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                    builder.setTitle("로그인 실패")
+                            .setMessage("ID와 비밀번호를 모두 입력해주세요.")
+                            .setNegativeButton("확인",null)
+                            .show();
+                    return;
+                }
 
                 new Thread() {
                     public void run() {
@@ -87,12 +98,29 @@ public class LoginActivity extends AppCompatActivity {
             Log.d(TAG, "서버에서 응답한 Body:" + body);
             try {
                 JSONObject jsonObject = new JSONObject(body);
-                if(jsonObject.getString("result").equals("true"));
 
-                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                intent.putExtra("loginID",etId.getText().toString());
+                if(jsonObject.getString("result").equals("true")){
+                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                    intent.putExtra("loginID",etId.getText().toString());
 
-                finish();
+                    startActivity(intent);
+                }else {
+                    Handler handler = new Handler(Looper.getMainLooper());
+
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                            builder.setTitle("로그인 실패")
+                                    .setMessage("ID 또는 비밀번호가 틀립니다.")
+                                    .setNegativeButton("확인",null)
+                                    .show();
+                            etId.setText("");
+                            etPwd.setText("");
+                        }
+                    });
+                }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
