@@ -49,14 +49,6 @@ public class FragmentHome extends Fragment {
 
         scheduleAdapter.notifyDataSetChanged();
 
-        if(MainActivity.getLoginID()!=null&&!MainActivity.getLoginID().equals("")){
-            mRecycler_schedule.setVisibility(View.VISIBLE);
-            view.findViewById(R.id.tvUnsuableField).setVisibility(View.GONE);
-        }else {
-            mRecycler_schedule.setVisibility(View.GONE);
-            view.findViewById(R.id.tvUnsuableField).setVisibility(View.VISIBLE);
-        }
-
         return view;
     }
 

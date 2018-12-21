@@ -25,13 +25,6 @@ public class FragmentMyDuck extends Fragment {
 
         View view = inflater.inflate(R.layout.my_duck_fragment, container, false);
 
-        if(MainActivity.getLoginID()!=null&&!MainActivity.getLoginID().equals("")){
-            view.findViewById(R.id.rlMyduck).setVisibility(View.VISIBLE);
-            view.findViewById(R.id.tvUnsuableField).setVisibility(View.GONE);
-        }else{
-            view.findViewById(R.id.rlMyduck).setVisibility(View.GONE);
-            view.findViewById(R.id.tvUnsuableField).setVisibility(View.VISIBLE);
-        }
         return view;
     }
 
