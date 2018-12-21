@@ -14,6 +14,9 @@
         $row_info['num']=$row2['d_no'];
         $row_info['name']=$row2['d_name'];
         $row_info['follower']=$row2['d_follower_count'];
+        $row_info['link']=$row2['d_link'];
+        $row_info['type']=$row2['d_type'];
+        $row_info['parent']=$row2['d_parent_no'];
         
         array_push($D_row,$row_info);
     }

@@ -58,7 +58,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button bt_tab1, bt_tab2;
 
-    public HashMap<String, String> userInfo = new HashMap<>();
+    private static HashMap<String, String> userInfo = new HashMap<>();
+    private static HashMap<String, String> duckInfo = new HashMap<>();
+    private static HashMap<String, String>[] interestInfo = new HashMap[3];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -226,6 +228,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return loginID;
     }
 
+    public static HashMap<String,String> getUserInfo(){
+        return userInfo;
+    }
+
+    public static HashMap<String,String> getDuckInfo(){
+        return duckInfo;
+    }
+
+    public static HashMap<String,String>[] getInterestInfo(){
+        return interestInfo;
+    }
+
     private final Callback getInfoCallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -239,25 +253,87 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             try {
                 JSONArray jsonArray = new JSONArray(body);
-
-
                 JSONObject jsonObject = jsonArray.getJSONObject(0);
+
                 userInfo.put("num", jsonObject.getString("num"));
                 userInfo.put("name", jsonObject.getString("name"));
+                userInfo.put("duck", jsonObject.getString("duck"));
+                userInfo.put("itrst1", jsonObject.getString("itrst1"));
+                userInfo.put("itrst2", jsonObject.getString("itrst2"));
+                userInfo.put("itrst3", jsonObject.getString("itrst3"));
 
                 Handler handler = new Handler(Looper.getMainLooper());
+
 
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(MainActivity.this, "[" + userInfo.get("name") + "]" + "님 환영합니다.", Toast.LENGTH_LONG).show();
+                        final GetJson httpConn = GetJson.getInstance();
+
+                        String param = "";
+                        for (int i = 1; i < 4; i++) {
+                            param += "GENRE" + i + "=" + userInfo.get("itrst" + i) + "&";
+                        }
+                        httpConn.requestWebServer(getDuckCallback, "getDuckInfo.php", "NUM=" + userInfo.get("duck"));
+                        httpConn.requestWebServer(getGenreCallback, "getGenre.php", param);
                     }
                 });
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+    };
 
+    private final Callback getDuckCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            Log.d("Duck", "콜백오류:" + e.getMessage());
+        }
 
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String body = response.body().string();
+            Log.d("Duck", "성공:" + body);
+
+            try {
+                JSONArray jsonArray = new JSONArray(body);
+                JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+                duckInfo.put("num", jsonObject.getString("num"));
+                duckInfo.put("name", jsonObject.getString("name"));
+                duckInfo.put("follower", jsonObject.getString("follower"));
+                duckInfo.put("link", jsonObject.getString("link"));
+                duckInfo.put("type", jsonObject.getString("type"));
+                duckInfo.put("parent", jsonObject.getString("parent"));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    private final Callback getGenreCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            Log.d("Interest", "콜백오류:" + e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String body = response.body().string();
+            Log.d("Interest", "성공:" + body);
+
+            try {
+                JSONArray jsonArray = new JSONArray(body);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    interestInfo[i] = new HashMap<>();
+                    interestInfo[i].put("num", jsonObject.getString("num"));
+                    interestInfo[i].put("genre", jsonObject.getString("genre"));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     };
 }

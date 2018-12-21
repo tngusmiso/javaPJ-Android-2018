@@ -58,9 +58,10 @@
                 android:layout_centerHorizontal="true">
 
                 <TextView
+                    android:id="@+id/tvMembers"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
-                    android:text="디오, 레이, 백현, 세훈, 수호, 시우민, 찬열, 첸, 카이"
+                    android:text="멤버, 멤버, 멤버..."
                     android:textAlignment="center" />
             </RelativeLayout>
 
