@@ -1,7 +1,15 @@
 <?php
+
+  $Genre1=$_GET['GENRE1'];
+  $Genre2=$_GET['GENRE2'];
+  $Genre3=$_GET['GENRE3'];
+    
     require_once('dbcon.php');
 
-    $sql="SELECT * FROM DUCK_GENRE";
+    if($Genre1=="")
+      $sql="SELECT * FROM DUCK_GENRE";
+    else
+      $sql="SELECT * FROM DUCK_GENRE WHERE genre_no='$Genre1' OR genre_no='$Genre2' OR genre_no='$Genre3'";
 
     $res=mysqli_query($con,$sql);
 

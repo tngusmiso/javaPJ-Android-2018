@@ -2,11 +2,15 @@ package cse.moblie.ducks;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Debug;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -15,11 +19,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import cse.moblie.ducks.fragment.FragmentHome;
 import cse.moblie.ducks.fragment.FragmentMyDuck;
 import cse.moblie.ducks.fragment.FragmentMyPage;
 import cse.moblie.ducks.fragment.FragmentSchedule;
 import cse.moblie.ducks.fragment.FragmentSharing;
+import cse.moblie.ducks.request.GetJson;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private final int FRAG_HOME = 1;
@@ -42,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button bt_tab1, bt_tab2;
 
+    public HashMap<String, String> userInfo = new HashMap<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +72,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         loginID = getIntent().getStringExtra("loginID");
+        final GetJson httpConn = GetJson.getInstance();
+        new Thread() {
+            public void run() {
+                httpConn.requestWebServer(getInfoCallback, "getMyInfo.php", "ID=" + loginID);
+            }
+        }.start();
 
         // 상단앱바 설정
         RelativeLayout topBar = findViewById(R.id.rlTopBar);
@@ -83,16 +107,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ;
         });
 
-        // 검색버튼
-        Button btLogin = findViewById(R.id.btLogin);
-        btLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-
         btHome = findViewById(R.id.btHome);
         btMyDuck = findViewById(R.id.btMyDuck);
         btMyPage = findViewById(R.id.btMypage);
@@ -108,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // 임의로 액티비티 호출 시점에 어느 프레그먼트를 프레임레이아웃에 띄울 것인지를 정함
         callFragment(FRAG_HOME);
+
     }
 
     @Override
@@ -207,8 +222,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         v.setTextColor(Color.parseColor("#999999"));
     }
 
-    public static String getLoginID(){
+    public static String getLoginID() {
         return loginID;
     }
 
+    private final Callback getInfoCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            Log.d("Genre", "콜백오류:" + e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String body = response.body().string();
+            Log.d("MyInfo", "성공:" + body);
+
+            try {
+                JSONArray jsonArray = new JSONArray(body);
+
+
+                JSONObject jsonObject = jsonArray.getJSONObject(0);
+                userInfo.put("num", jsonObject.getString("num"));
+                userInfo.put("name", jsonObject.getString("name"));
+
+                Handler handler = new Handler(Looper.getMainLooper());
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "[" + userInfo.get("name") + "]" + "님 환영합니다.", Toast.LENGTH_LONG).show();
+                    }
+                });
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+    };
 }

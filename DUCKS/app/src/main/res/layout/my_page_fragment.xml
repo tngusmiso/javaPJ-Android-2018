@@ -113,20 +113,20 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true">
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/ibInter1"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_margin="10dp" />
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/ibInter2"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_margin="10dp"
                         android:layout_toRightOf="@id/ibInter1" />
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/ivInter3"
                         android:layout_width="100dp"
                         android:layout_height="100dp"

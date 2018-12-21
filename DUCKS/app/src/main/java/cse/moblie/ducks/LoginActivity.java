@@ -54,11 +54,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(etId.getText().toString().equals("")||etPwd.getText().toString().equals("")){
+                if (etId.getText().toString().equals("") || etPwd.getText().toString().equals("")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                     builder.setTitle("로그인 실패")
                             .setMessage("ID와 비밀번호를 모두 입력해주세요.")
-                            .setNegativeButton("확인",null)
+                            .setNegativeButton("확인", null)
                             .show();
                     return;
                 }
@@ -70,9 +70,9 @@ public class LoginActivity extends AppCompatActivity {
                         String[] param2 = {etId.getText().toString(), etPwd.getText().toString()};
                         List<String> list = new ArrayList<>();
 
-                        for(int i = 0; i<param1.length;i++)
-                            if(!param2[i].equals(""))
-                                list.add(param1[i]+param2[i]);
+                        for (int i = 0; i < param1.length; i++)
+                            if (!param2[i].equals(""))
+                                list.add(param1[i] + param2[i]);
 
 
                         param1 = list.toArray(new String[list.size()]);
@@ -99,12 +99,13 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 JSONObject jsonObject = new JSONObject(body);
 
-                if(jsonObject.getString("result").equals("true")){
-                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                    intent.putExtra("loginID",etId.getText().toString());
+                if (jsonObject.getString("result").equals("true")) {
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("loginID", etId.getText().toString());
 
                     startActivity(intent);
-                }else {
+                    finish();
+                } else {
                     Handler handler = new Handler(Looper.getMainLooper());
 
                     handler.post(new Runnable() {
@@ -113,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                             builder.setTitle("로그인 실패")
                                     .setMessage("ID 또는 비밀번호가 틀립니다.")
-                                    .setNegativeButton("확인",null)
+                                    .setNegativeButton("확인", null)
                                     .show();
                             etId.setText("");
                             etPwd.setText("");

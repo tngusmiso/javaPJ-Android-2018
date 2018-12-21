@@ -20,11 +20,4 @@
         android:layout_marginTop="10dp"
         android:src="@drawable/logo"/>
 
-    <Button
-        android:id="@+id/btLogin"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:text="로그인"/>
 </RelativeLayout>
