@@ -42,27 +42,60 @@
             android:textStyle="bold" />
 
 
-        <Spinner
-            android:id="@+id/spParent"
-            android:layout_width="150sp"
-            android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
             android:layout_below="@id/tvSharing1"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="장르"/>
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="200sp"
+            android:layout_height="50sp"
+            android:layout_below="@id/tvSharing1"
+            android:layout_toRightOf="@id/textView1"
             android:tooltipText="분류 선택"></Spinner>
 
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:layout_below="@id/spinner1"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="분류1"/>
         <Spinner
-            android:id="@+id/spChild"
-            android:layout_width="150sp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvSharing1"
-            android:layout_toRightOf="@id/spParent"
+            android:id="@+id/spinner2"
+            android:layout_width="200sp"
+            android:layout_height="50sp"
+            android:layout_below="@id/spinner1"
+            android:layout_toRightOf="@id/textView2"
+            android:tooltipText="분류 선택"></Spinner>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:layout_below="@id/spinner2"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="분류2"/>
+        <Spinner
+            android:id="@+id/spinner3"
+            android:layout_width="200sp"
+            android:layout_height="50sp"
+            android:layout_below="@id/spinner2"
+            android:layout_toRightOf="@id/textView3"
             android:tooltipText="분류 선택"></Spinner>
 
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_below="@id/spParent"
+            android:layout_below="@id/spinner3"
             android:layout_margin="10dp"
             android:text="제목" />
 
@@ -70,7 +103,7 @@
             android:id="@+id/etTitle"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_below="@id/spParent"
+            android:layout_below="@id/spinner3"
             android:layout_marginRight="10dp"
             android:layout_toRightOf="@id/tvTitle"
             android:background="@drawable/textbox"

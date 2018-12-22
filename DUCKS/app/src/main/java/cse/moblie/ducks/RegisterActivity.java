@@ -175,7 +175,7 @@ public class RegisterActivity extends AppCompatActivity {
                 final String name = etNickname.getText().toString();
                 final String email = etEmail.getText().toString();
                 final String type = "";
-                final String duck = "";
+                final String duck = (spinner3.getSelectedItemPosition()==0)?spinner2.getSelectedItemPosition()+"":spinner3.getSelectedItemPosition()+"";
                 final String inter1 = "";
                 final String inter2 = "";
                 final String inter3 = "";
@@ -220,7 +220,7 @@ public class RegisterActivity extends AppCompatActivity {
         // 장르 스피너 불러오기
         new Thread() {
             public void run() {
-                httpConn.requestWebServer(genreCallback, "getGenre.php");
+                httpConn.requestWebServer(genreCallback, "getSharingBoard.php");
             }
         }.start();
 
@@ -312,8 +312,6 @@ public class RegisterActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
         }
     };
 

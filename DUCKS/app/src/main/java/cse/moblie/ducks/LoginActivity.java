@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         final GetJson httpConn = GetJson.getInstance();
 
         etId = findViewById(R.id.etID);

@@ -1,10 +1,14 @@
 <?php
 
     $Id=$_GET['ID'];
+    $Num=$_GET['NUM'];
 
     require_once('dbcon.php');
 
-    $sql="SELECT * FROM USER WHERE u_id='$Id'";
+    if($Id != "")
+        $sql="SELECT * FROM USER WHERE u_id='$Id'";
+    else if($Num != "")
+        $sql="SELECT * FROM USER WHERE u_no='$Num'";
     
     $res=mysqli_query($con,$sql);
 

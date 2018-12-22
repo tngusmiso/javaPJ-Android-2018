@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static String loginID = "";
 
-
     // 위젯에 대한 참조
     TextView btHome;
     TextView btMyDuck;
