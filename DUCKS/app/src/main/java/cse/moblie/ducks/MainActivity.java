@@ -32,6 +32,8 @@ import cse.moblie.ducks.fragment.FragmentMyDuck;
 import cse.moblie.ducks.fragment.FragmentMyPage;
 import cse.moblie.ducks.fragment.FragmentSchedule;
 import cse.moblie.ducks.fragment.FragmentSharing;
+import cse.moblie.ducks.recycler.CardAdapter;
+import cse.moblie.ducks.recycler.ScheduleItem;
 import cse.moblie.ducks.request.GetJson;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static HashMap<String, String> userInfo = new HashMap<>();
     private static HashMap<String, String> duckInfo = new HashMap<>();
     private static HashMap<String, String>[] interestInfo = new HashMap[3];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -239,6 +242,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return interestInfo;
     }
 
+    public static ArrayList<ScheduleItem> getArrayList_schedule(){
+        return getArrayList_schedule();
+    }
+
     private final Callback getInfoCallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -263,7 +270,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 Handler handler = new Handler(Looper.getMainLooper());
 
-
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -275,6 +281,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                         httpConn.requestWebServer(getDuckCallback, "getDuckInfo.php", "NUM=" + userInfo.get("duck"));
                         httpConn.requestWebServer(getGenreCallback, "getGenre.php", param);
+                        Toast.makeText(MainActivity.this,userInfo.get("name")+"님 환영합니다.",Toast.LENGTH_LONG).show();
                     }
                 });
             } catch (JSONException e) {
@@ -308,6 +315,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+
         }
     };
 

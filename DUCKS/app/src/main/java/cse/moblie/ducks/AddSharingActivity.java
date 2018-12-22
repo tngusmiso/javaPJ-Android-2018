@@ -132,7 +132,7 @@ public class AddSharingActivity extends AppCompatActivity {
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Upload(writerNum, (spinner3.getSelectedItemPosition()==0)?spinner2.getSelectedItemPosition()+"":spinner3.getSelectedItemPosition()+""
+                                Upload(writerNum, (spinner3.getSelectedItemPosition()==0)?duckMap.get(spinner2.getSelectedItem()+""):duck2Map.get(spinner3.getSelectedItem()+"")
                                         , etTitle.getText().toString(), etContent.getText().toString(), btDueDate.getText().toString());
                             }
                         })
@@ -141,7 +141,7 @@ public class AddSharingActivity extends AppCompatActivity {
                     return;
                 }
 
-                else Upload(writerNum, (spinner3.getSelectedItemPosition()==0)?spinner2.getSelectedItemPosition()+"":spinner3.getSelectedItemPosition()+""
+                else Upload(writerNum, (spinner3.getSelectedItemPosition()==0)?duckMap.get(spinner2.getSelectedItem()+""):duck2Map.get(spinner3.getSelectedItem()+"")
                         , etTitle.getText().toString(), etContent.getText().toString(), btDueDate.getText().toString());
             }
         });

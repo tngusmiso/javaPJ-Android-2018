@@ -20,8 +20,11 @@
         $sql="INSERT INTO USER (u_id, u_pwd, u_name, u_email, duck_type, duck_no, u_interest1, u_interest2, u_interest3) 
             Values ('$Id','$Pw','$Name','$Email','$Type','$Duck','$Interest1','$Interest2','$Interest3')";
         
-        if(mysqli_query($con,$sql))
+        if(mysqli_query($con,$sql)){
             $result= array("result" => "100");//100이면 로그인 성공
+            $query = "UPDATE DUCK_LIST SET d_follower_count = d_follower_count + 1 WHERE d_no='$Duck'";
+            mysqli_query($con,$query);
+        }
         else
             $result= array("result" => "50"); // 50이면 db 삽입 실패
     }

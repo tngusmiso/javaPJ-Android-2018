@@ -38,7 +38,9 @@ public class FragmentMyDuck extends Fragment {
 
         tvDuckName.setText(duckInfo.get("name"));
         tvFollower.setText(duckInfo.get("follower") + "덕");
-        tvLink.setText(duckInfo.get("link"));
+        if(duckInfo.get("link")==null||duckInfo.get("link").equals("null"))
+            tvLink.setText("");
+        else tvLink.setText(duckInfo.get("link"));
 
         if(duckInfo.get("type").equals("0")){
             tvMembers.setVisibility(View.VISIBLE);
