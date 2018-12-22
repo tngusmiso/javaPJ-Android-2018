@@ -57,8 +57,8 @@ public class FragmentSchedule extends Fragment {
 
 
 
-        arrayList_schedule.add(new ScheduleItem(0,"DEC", "25","18:00","20:30","크리스마스 파티","서울시 어쩌구 저쩌구",null,0));
-        arrayList_schedule.add(new ScheduleItem(0,"DEC", "31","22:00","23:59","새해 파티","서울시 어쩌구 저쩌구",null,0));
+        arrayList_schedule.add(new ScheduleItem(0,"DEC", "25","18:00","20:30","크리스마스 파티","서울시 어쩌구 저쩌구",null,null));
+        arrayList_schedule.add(new ScheduleItem(0,"DEC", "31","22:00","23:59","새해 파티","서울시 어쩌구 저쩌구",null,null));
 
         mRecycler_schedule = view.findViewById(R.id.rvSchedule);
         mRecycler_schedule.setHasFixedSize(true);

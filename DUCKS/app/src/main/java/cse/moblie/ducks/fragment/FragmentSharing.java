@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,8 +20,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import cse.moblie.ducks.AddSharingActivity;
+import cse.moblie.ducks.LoginActivity;
 import cse.moblie.ducks.MainActivity;
 import cse.moblie.ducks.R;
 import cse.moblie.ducks.recycler.CardAdapter;
@@ -38,6 +41,7 @@ public class FragmentSharing extends Fragment {
     ArrayList<ScheduleItem> arrayList_sharing = new ArrayList<>();
     private CardAdapter sharingAdapter;
 
+
     public FragmentSharing() {
         // Required empty public constructor
     }
@@ -52,21 +56,11 @@ public class FragmentSharing extends Fragment {
         btAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),AddSharingActivity.class);
+                Intent intent = new Intent(getActivity(), AddSharingActivity.class);
                 intent.putExtra("Writer", MainActivity.getUserInfo().get("num"));
                 startActivityForResult(intent, REQUEST_ADDSHR);
             }
         });
-
-        final GetJson httpConn = GetJson.getInstance();
-        new Thread() {
-            public void run() {
-                httpConn.requestWebServer(getInfoCallback, "getSharingBoard.php", "ID=" + loginID);
-            }
-        }.start();
-
-        arrayList_sharing.add(new ScheduleItem(1,"곰돌이", "2019.12.10","17:20","2019.01.10","크리스마스 굿즈 나눔snasnasnandfnsdf","미개봉 어쩌구 저쩌구","EXO",0));
-        arrayList_sharing.add(new ScheduleItem(1,"곰돌이", "2019.12.10","17:20","2019.01.10","연말콘서트 티켓 양도","직거래 어쩌구 저쩌구","EXO",12));
 
         mRecycler_sharing = view.findViewById(R.id.rvSharing);
         mRecycler_sharing.setHasFixedSize(true);
@@ -79,51 +73,58 @@ public class FragmentSharing extends Fragment {
 
         mRecycler_sharing.setAdapter(sharingAdapter);
 
-        sharingAdapter.notifyDataSetChanged();
+        final GetJson httpConn = GetJson.getInstance();
+        new Thread() {
+            public void run() {
+                httpConn.requestWebServer(getBoardCallback, "getSharingBoard.php", "DUCK=" + MainActivity.getDuckInfo().get("num"));
+            }
+        }.start();
+
         return view;
     }
 
-    private final Callback getInfoCallback = new Callback() {
+
+    private final Callback getBoardCallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
-            Log.d("Genre", "콜백오류:" + e.getMessage());
+            Log.d("Board", "콜백오류:" + e.getMessage());
         }
 
         @Override
         public void onResponse(Call call, Response response) throws IOException {
             String body = response.body().string();
-            Log.d("MyInfo", "성공:" + body);
+            Log.d("Board", "성공:" + body);
 
             try {
                 JSONArray jsonArray = new JSONArray(body);
-                JSONObject jsonObject = jsonArray.getJSONObject(0);
-
-                userInfo.put("num", jsonObject.getString("num"));
-                userInfo.put("name", jsonObject.getString("name"));
-                userInfo.put("duck", jsonObject.getString("duck"));
-                userInfo.put("itrst1", jsonObject.getString("itrst1"));
-                userInfo.put("itrst2", jsonObject.getString("itrst2"));
-                userInfo.put("itrst3", jsonObject.getString("itrst3"));
-
-                Handler handler = new Handler(Looper.getMainLooper());
-
-
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        final GetJson httpConn = GetJson.getInstance();
-
-                        String param = "";
-                        for (int i = 1; i < 4; i++) {
-                            param += "GENRE" + i + "=" + userInfo.get("itrst" + i) + "&";
-                        }
-                        httpConn.requestWebServer(getDuckCallback, "getDuckInfo.php", "NUM=" + userInfo.get("duck"));
-                        httpConn.requestWebServer(getGenreCallback, "getGenre.php", param);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    final String writer = jsonObject.getString("writer");
+                    final String timestamp = jsonObject.getString("cretime");
+                    final String writtenDate = timestamp.split(" ")[0];
+                    final String writtenTime = timestamp.split(" ")[1];
+                    final String dueDate = jsonObject.getString("due");
+                    final String title = jsonObject.getString("title");
+                    final String content = jsonObject.getString("content");
+                    final String duck = MainActivity.getDuckInfo().get("name");
+                    final String comments = jsonObject.getString("comment");
+                    try {
+                        arrayList_sharing.add(new ScheduleItem(1, writer, writtenDate, writtenTime, dueDate, title, content, duck, comments));
+                        Handler handler = new Handler(Looper.getMainLooper());
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                sharingAdapter.notifyDataSetChanged();
+                            }
+                        });
+                    }catch (NumberFormatException e) {
+                        e.printStackTrace();
                     }
-                });
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
     };
+
 }
