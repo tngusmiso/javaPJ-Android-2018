@@ -33,6 +33,8 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
+import static android.app.Activity.RESULT_OK;
+
 public class FragmentSharing extends Fragment {
 
     private final int REQUEST_ADDSHR = 1;
@@ -83,6 +85,24 @@ public class FragmentSharing extends Fragment {
         return view;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_ADDSHR:
+                if (resultCode == RESULT_OK) {
+                    final GetJson httpConn = GetJson.getInstance();
+                    new Thread() {
+                        public void run() {
+                            httpConn.requestWebServer(getBoardCallback, "getSharingBoard.php", "DUCK=" + MainActivity.getDuckInfo().get("num"));
+                        }
+                    }.start();
+                    arrayList_sharing.clear();
+                    sharingAdapter.notifyDataSetChanged();
+                }
+                break;
+        }
+    }
 
     private final Callback getBoardCallback = new Callback() {
         @Override
@@ -108,18 +128,15 @@ public class FragmentSharing extends Fragment {
                     final String content = jsonObject.getString("content");
                     final String duck = MainActivity.getDuckInfo().get("name");
                     final String comments = jsonObject.getString("comment");
-                    try {
-                        arrayList_sharing.add(new ScheduleItem(1, writer, writtenDate, writtenTime, dueDate, title, content, duck, comments));
-                        Handler handler = new Handler(Looper.getMainLooper());
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                sharingAdapter.notifyDataSetChanged();
-                            }
-                        });
-                    }catch (NumberFormatException e) {
-                        e.printStackTrace();
-                    }
+                    arrayList_sharing.add(new ScheduleItem(1, writer, writtenDate, writtenTime, dueDate, title, content, duck, comments));
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            sharingAdapter.notifyDataSetChanged();
+                        }
+                    });
+
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
