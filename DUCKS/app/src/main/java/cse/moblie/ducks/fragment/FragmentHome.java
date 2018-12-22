@@ -108,15 +108,18 @@ public class FragmentHome extends Fragment {
                     final String startDate= start.split(" ")[0].split("-")[2];
                     final String startTime = start.split(" ")[1].split(":")[0]+":"+start.split(" ")[1].split(":")[1];
                     final String end = jsonObject.getString("end");
-                    final String endMonth = end.split(" ")[0].split("-")[1];
-                    final String endDate = end.split(" ")[0].split("-")[2];
-                    final String entTime = end.split(" ")[1].split(":")[0]+":"+end.split(" ")[1].split(":")[1];
+                    String endMonth = null,endDate = null, endTime = null;
+                    if(end!=null||!end.equals("NULL")){
+                        endMonth = end.split(" ")[0].split("-")[1];
+                        endDate = end.split(" ")[0].split("-")[2];
+                        endTime = end.split(" ")[1].split(":")[0]+":"+end.split(" ")[1].split(":")[1];
+                    }
                     final String string = jsonObject.getString("string");
                     final String location = MainActivity.getDuckInfo().get("location");
                     final String duck = MainActivity.getDuckInfo().get("duck");
                     final String like = jsonObject.getString("like");
 
-                    arrayList_schedule.add(new ScheduleItem(0,startMonth, startDate, startTime,entTime,string,location,duck,like));
+                    arrayList_schedule.add(new ScheduleItem(0,startMonth, startDate, startTime,endTime,string,location,duck,like));
 
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {

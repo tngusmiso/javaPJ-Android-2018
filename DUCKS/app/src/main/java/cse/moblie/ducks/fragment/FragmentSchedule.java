@@ -1,9 +1,11 @@
 package cse.moblie.ducks.fragment;
 
-import android.content.Intent;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,9 +26,12 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.concurrent.Executors;
 
 import cse.moblie.ducks.MainActivity;
 import cse.moblie.ducks.R;
+import cse.moblie.ducks.decorator.EventDecorator;
 import cse.moblie.ducks.decorator.SaturdayDecorator;
 import cse.moblie.ducks.decorator.SundayDecorator;
 import cse.moblie.ducks.decorator.TodayDecorator;
@@ -36,8 +42,6 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-import static android.app.Activity.RESULT_OK;
-
 public class FragmentSchedule extends Fragment {
 
     private static MaterialCalendarView materialCalendarView;
@@ -45,6 +49,7 @@ public class FragmentSchedule extends Fragment {
     private RecyclerView mRecycler_schedule;
     private RecyclerView.LayoutManager mLayoutManager_schedule;
     ArrayList<ScheduleItem> arrayList_schedule = new ArrayList<>();
+    ArrayList<String> arrayList_days= new ArrayList<String>();
     private CardAdapter scheduleAdapter;
 
     public FragmentSchedule() {
@@ -70,6 +75,28 @@ public class FragmentSchedule extends Fragment {
         materialCalendarView.addDecorator(new SundayDecorator());
         materialCalendarView.addDecorator(new SaturdayDecorator());
         materialCalendarView.addDecorator(new TodayDecorator());
+
+        new ApiSimulator(arrayList_days).executeOnExecutor(Executors.newSingleThreadExecutor());
+
+        materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                int Year = date.getYear();
+                int Month = date.getMonth() + 1;
+                int Day = date.getDay();
+
+                Log.i("Year test", Year + "");
+                Log.i("Month test", Month + "");
+                Log.i("Day test", Day + "");
+
+//                String shot_Day = Year + "," + Month + "," + Day;
+
+//                Log.i("shot_Day test", shot_Day + "");
+                materialCalendarView.clearSelection();
+//
+//                Toast.makeText(getActivity(), shot_Day , Toast.LENGTH_SHORT).show();
+            }
+        });
 
         mRecycler_schedule = view.findViewById(R.id.rvSchedule);
         mRecycler_schedule.setHasFixedSize(true);
@@ -141,6 +168,7 @@ public class FragmentSchedule extends Fragment {
                     final String like = jsonObject.getString("like");
 
                     arrayList_schedule.add(new ScheduleItem(0,startMonth, startDate, startTime,entTime,string,location,duck,like));
+                    arrayList_days.add(start.split(" ")[0].toString());
 
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {
@@ -156,4 +184,57 @@ public class FragmentSchedule extends Fragment {
             }
         }
     };
+
+
+    private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
+
+        ArrayList<String> Time_Result;
+
+        ApiSimulator(ArrayList<String> Time_Result){
+            this.Time_Result = Time_Result;
+        }
+
+        @Override
+        protected List<CalendarDay> doInBackground(@NonNull Void... voids) {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Calendar calendar = Calendar.getInstance();
+            ArrayList<CalendarDay> dates = new ArrayList<>();
+
+            Log.i("Time_Result", Time_Result.get(0) + "");
+
+            /*특정날짜 달력에 점표시해주는곳*/
+            /*월은 0이 1월 년,일은 그대로*/
+            //string 문자열인 Time_Result 을 받아와서 ,를 기준으로짜르고 string을 int 로 변환
+            for(int i = 0 ; i < Time_Result.size() ; i ++){
+                CalendarDay day = CalendarDay.from(calendar);
+                String[] time = Time_Result.get(i).split("-");
+                int year = Integer.parseInt(time[0]);
+                int month = Integer.parseInt(time[1]);
+                int dayy = Integer.parseInt(time[2]);
+
+                Log.i("Year test", year + "");
+                Log.i("Month test", month + "");
+                Log.i("Day test", dayy + "");
+
+                calendar.set(year,month-1,dayy);
+                dates.add(CalendarDay.from(year,month-1,dayy));
+            }
+            return dates;
+        }
+
+        @Override
+        protected void onPostExecute(@NonNull List<CalendarDay> calendarDays) {
+            super.onPostExecute(calendarDays);
+
+//            if (isFinishing()) {
+//                return;
+//            }
+            materialCalendarView.addDecorator(new EventDecorator(Color.parseColor("#C70309"), calendarDays,getActivity()));
+        }
+    }
 }
