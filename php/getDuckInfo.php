@@ -17,6 +17,7 @@
         $row_info['link']=$row2['d_link'];
         $row_info['type']=$row2['d_type'];
         $row_info['parent']=$row2['d_parent_no'];
+        $row_info['pic']=$row2['d_photo_path'];
         
         array_push($D_row,$row_info);
     }

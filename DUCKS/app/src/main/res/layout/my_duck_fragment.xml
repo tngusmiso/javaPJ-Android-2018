@@ -19,7 +19,7 @@
                 android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="10dp"
-                android:src="@drawable/duck" />
+                android:src="@drawable/my_pic" />
 
             <TextView
                 android:id="@+id/tvDuckName"

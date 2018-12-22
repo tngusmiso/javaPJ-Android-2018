@@ -89,12 +89,6 @@ public class FragmentSchedule extends Fragment {
                 Log.i("Month test", Month + "");
                 Log.i("Day test", Day + "");
 
-//                String shot_Day = Year + "," + Month + "," + Day;
-
-//                Log.i("shot_Day test", shot_Day + "");
-                materialCalendarView.clearSelection();
-//
-//                Toast.makeText(getActivity(), shot_Day , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -205,7 +199,7 @@ public class FragmentSchedule extends Fragment {
             Calendar calendar = Calendar.getInstance();
             ArrayList<CalendarDay> dates = new ArrayList<>();
 
-            Log.i("Time_Result", Time_Result.get(0) + "");
+            Log.i("Time_Result", Time_Result.toString() + "");
 
             /*특정날짜 달력에 점표시해주는곳*/
             /*월은 0이 1월 년,일은 그대로*/

@@ -24,8 +24,8 @@
                     android:orientation="vertical"
                     android:gravity="center_horizontal"
                     android:layout_weight="0.2">
-                    <ImageView
-                        android:id="@+id/ivMyPic"
+                    <ImageButton
+                        android:id="@+id/ibMyPic"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:src="@drawable/my_pic"/>
@@ -63,7 +63,7 @@
                         android:id="@+id/ivDuckPic"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/duck"/>
+                        android:src="@drawable/my_pic"/>
 
                     <TextView
                         android:id="@+id/tvDuckName"

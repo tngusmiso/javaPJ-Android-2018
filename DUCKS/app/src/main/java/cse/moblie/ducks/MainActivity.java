@@ -311,6 +311,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 duckInfo.put("link", jsonObject.getString("link"));
                 duckInfo.put("type", jsonObject.getString("type"));
                 duckInfo.put("parent", jsonObject.getString("parent"));
+                duckInfo.put("pic", jsonObject.getString("pic"));
 
             } catch (JSONException e) {
                 e.printStackTrace();
