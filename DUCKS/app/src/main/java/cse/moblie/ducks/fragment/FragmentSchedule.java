@@ -101,7 +101,6 @@ public class FragmentSchedule extends Fragment {
 
         scheduleAdapter = new CardAdapter(arrayList_schedule,null);
 
-
         mRecycler_schedule.setAdapter(scheduleAdapter);
 
         scheduleAdapter.notifyDataSetChanged();

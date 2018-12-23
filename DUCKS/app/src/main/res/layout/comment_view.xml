@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
+    android:layout_marginBottom="20sp"
     android:stretchColumns="1">
 
     <TableRow>
@@ -15,6 +16,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tvComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8sp"
@@ -25,11 +27,13 @@
             android:orientation="vertical"
             android:gravity="end">
             <TextView
+                android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2018-12-23"
                 android:textSize="9sp"/>
             <TextView
+                android:id="@+id/tvTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="12:23"

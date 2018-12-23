@@ -34,6 +34,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 public class FragmentSharing extends Fragment {
@@ -109,6 +110,18 @@ public class FragmentSharing extends Fragment {
         switch (requestCode) {
             case REQUEST_ADDSHR:
                 if (resultCode == RESULT_OK) {
+                    final GetJson httpConn = GetJson.getInstance();
+                    new Thread() {
+                        public void run() {
+                            httpConn.requestWebServer(getBoardCallback, "getSharingBoard.php", "DUCK=" + MainActivity.getDuckInfo().get("num"));
+                        }
+                    }.start();
+                    arrayList_sharing.clear();
+                    sharingAdapter.notifyDataSetChanged();
+                }
+                break;
+            case REUQUEST_COMMENT:
+                if(requestCode == RESULT_CANCELED){
                     final GetJson httpConn = GetJson.getInstance();
                     new Thread() {
                         public void run() {

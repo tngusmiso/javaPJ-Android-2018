@@ -6,10 +6,10 @@ public class ScheduleItem {
 
     int Type;
 
-    String month;       //writer
-    String date;        //writtenDate
-    String startTime;   //writtenTime
-    String endTime;     //dueTime
+    String month;       //writer        //writer
+    String date;        //writtenDate   //comment
+    String startTime;   //writtenTime   //date
+    String endTime;     //dueTime       //time
     String title;       //title
     String address;     //content
 

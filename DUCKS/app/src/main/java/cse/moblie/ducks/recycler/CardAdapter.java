@@ -20,6 +20,7 @@ public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ArrayList<ScheduleItem> arrayList;
     private Button btComment;
     private OnItemClickListener onItemClickListener;
+
     public CardAdapter(ArrayList<ScheduleItem> arrayList,OnItemClickListener onItemClickListener) {
         this.arrayList = arrayList;
         this.onItemClickListener = onItemClickListener;
@@ -38,15 +39,18 @@ public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 View v1 = inflater.inflate(R.layout.schedule_cardview, viewGroup, false);
                 viewHolder = new ScheduleViewHolder(v1);
                 break;
-
             case 1 :
                 View v2 = inflater.inflate(R.layout.sharing_cardview, viewGroup, false);
                 viewHolder = new SharingViewHolder(v2);
                 break;
+            case 2 :
+                View v3 = inflater.inflate(R.layout.comment_view, viewGroup, false);
+                viewHolder = new CommentViewHolder(v3);
+                break;
 
             default:
-                View v = inflater.inflate(R.layout.schedule_fragment, viewGroup, false);
-                viewHolder = new ScheduleViewHolder(v);
+                View v = inflater.inflate(R.layout.comment_view, viewGroup, false);
+                viewHolder = new CommentViewHolder(v);
                 break;
         }
 
@@ -70,9 +74,10 @@ public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 });
                 configureSharingViewHolder(vh2, position);
                 break;
+
             default:
-                ScheduleViewHolder vh = (ScheduleViewHolder) viewHolder;
-                configureScheduleViewHolder(vh, position);
+                CommentViewHolder vh3 = (CommentViewHolder) viewHolder;
+                configureCommentViewHolder(vh3, position);
                 break;
         }
     }
@@ -105,6 +110,12 @@ public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         vh.content.setText(arrayList.get(position).getAddress());
         vh.duck.setText(arrayList.get(position).getDuck());
         vh.comments.setText("댓글보기("+arrayList.get(position).getComments()+")");
+    }
+    private void configureCommentViewHolder(CommentViewHolder vh, int position) {
+        vh.tvWriter.setText(arrayList.get(position).getMonth());
+        vh.tvComment.setText(arrayList.get(position).getDate());
+        vh.tvDate.setText(arrayList.get(position).getStartTime());
+        vh.tvTime.setText(arrayList.get(position).getEndTime());
     }
 
 
@@ -153,6 +164,22 @@ public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         public Button getComments() {
             return comments;
+        }
+    }
+
+    private class CommentViewHolder extends RecyclerView.ViewHolder {
+        TextView tvWriter;
+        TextView tvComment;
+        TextView tvDate;
+        TextView tvTime;
+
+        public CommentViewHolder(View view) {
+            super(view);
+
+            tvWriter=(TextView)view.findViewById(R.id.tvWriter);
+            tvComment=(TextView)view.findViewById(R.id.tvComment);
+            tvDate=(TextView)view.findViewById(R.id.tvDate);
+            tvTime=(TextView)view.findViewById(R.id.tvTime);
         }
     }
 }
