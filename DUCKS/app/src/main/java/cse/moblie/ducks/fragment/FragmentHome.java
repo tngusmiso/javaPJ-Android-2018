@@ -63,7 +63,7 @@ public class FragmentHome extends Fragment {
         mLayoutManager_schedule = new LinearLayoutManager(getContext());
         mRecycler_schedule.setLayoutManager(mLayoutManager_schedule);
 
-        scheduleAdapter = new CardAdapter(arrayList_schedule);
+        scheduleAdapter = new CardAdapter(arrayList_schedule,null);
         mRecycler_schedule.setAdapter(scheduleAdapter);
 
         scheduleAdapter.notifyDataSetChanged();

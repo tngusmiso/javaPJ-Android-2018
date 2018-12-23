@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import cse.moblie.ducks.AddSharingActivity;
+import cse.moblie.ducks.CommentActivity;
 import cse.moblie.ducks.LoginActivity;
 import cse.moblie.ducks.MainActivity;
 import cse.moblie.ducks.R;
@@ -38,6 +39,8 @@ import static android.app.Activity.RESULT_OK;
 public class FragmentSharing extends Fragment {
 
     private final int REQUEST_ADDSHR = 1;
+    private final int REUQUEST_COMMENT = 2;
+
     private RecyclerView mRecycler_sharing;
     private RecyclerView.LayoutManager mLayoutManager_sharing;
     ArrayList<ScheduleItem> arrayList_sharing = new ArrayList<>();
@@ -71,7 +74,22 @@ public class FragmentSharing extends Fragment {
         //((LinearLayoutManager) mLayoutManager_schedule).setOrientation(LinearLayout.HORIZONTAL);
         mRecycler_sharing.setLayoutManager(mLayoutManager_sharing);
 
-        sharingAdapter = new CardAdapter(arrayList_sharing);
+        sharingAdapter = new CardAdapter(arrayList_sharing,new CardAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                Intent intent = new Intent(getActivity(),CommentActivity.class);
+                intent.putExtra("Duck", arrayList_sharing.get(position).getDuck());
+                intent.putExtra("Title", arrayList_sharing.get(position).getTitle());
+                intent.putExtra("Due", arrayList_sharing.get(position).getEndTime());
+                intent.putExtra("Content", arrayList_sharing.get(position).getAddress());
+                intent.putExtra("Writer", arrayList_sharing.get(position).getMonth());
+                intent.putExtra("WrittenDate", arrayList_sharing.get(position).getDate());
+                intent.putExtra("WrittenTime", arrayList_sharing.get(position).getStartTime());
+
+                startActivityForResult(intent,REUQUEST_COMMENT);
+            }
+        });
 
         mRecycler_sharing.setAdapter(sharingAdapter);
 

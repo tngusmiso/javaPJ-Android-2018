@@ -18,11 +18,16 @@ import cse.moblie.ducks.R;
 public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private ArrayList<ScheduleItem> arrayList;
-
-    public CardAdapter(ArrayList<ScheduleItem> arrayList) {
+    private Button btComment;
+    private OnItemClickListener onItemClickListener;
+    public CardAdapter(ArrayList<ScheduleItem> arrayList,OnItemClickListener onItemClickListener) {
         this.arrayList = arrayList;
+        this.onItemClickListener = onItemClickListener;
     }
 
+    public interface OnItemClickListener {
+        public void onItemClick(View view, int position);
+    }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         RecyclerView.ViewHolder viewHolder;
@@ -49,7 +54,7 @@ public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int position) {
         switch (viewHolder.getItemViewType()) {
             case 0:
                 ScheduleViewHolder vh1 = (ScheduleViewHolder) viewHolder;
@@ -57,6 +62,12 @@ public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 break;
             case 1:
                 SharingViewHolder vh2 = (SharingViewHolder) viewHolder;
+                vh2.getComments().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onItemClickListener.onItemClick(v, position);
+                    }
+                });
                 configureSharingViewHolder(vh2, position);
                 break;
             default:
@@ -138,6 +149,10 @@ public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             title=(TextView)view.findViewById(R.id.tvEachTitle);
             content=(TextView)view.findViewById(R.id.tvEachContent);
             comments = (Button)view.findViewById(R.id.btComments);
+        }
+
+        public Button getComments() {
+            return comments;
         }
     }
 }

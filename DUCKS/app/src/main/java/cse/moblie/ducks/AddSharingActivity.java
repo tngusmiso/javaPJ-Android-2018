@@ -33,6 +33,7 @@ import java.util.List;
 
 import cse.moblie.ducks.R;
 import cse.moblie.ducks.fragment.FragmentSharing;
+import cse.moblie.ducks.recycler.CardAdapter;
 import cse.moblie.ducks.request.GetJson;
 import okhttp3.Call;
 import okhttp3.Callback;

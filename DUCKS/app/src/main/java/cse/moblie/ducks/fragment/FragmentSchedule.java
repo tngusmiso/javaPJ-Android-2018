@@ -99,7 +99,7 @@ public class FragmentSchedule extends Fragment {
         //((LinearLayoutManager) mLayoutManager_schedule).setOrientation(LinearLayout.HORIZONTAL);
         mRecycler_schedule.setLayoutManager(mLayoutManager_schedule);
 
-        scheduleAdapter = new CardAdapter(arrayList_schedule);
+        scheduleAdapter = new CardAdapter(arrayList_schedule,null);
 
 
         mRecycler_schedule.setAdapter(scheduleAdapter);
