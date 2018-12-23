@@ -18,6 +18,12 @@
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:src="@drawable/logo"/>
+        android:src="@drawable/logo" />
 
+    <Button
+        android:id="@+id/btLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="로그아웃" />
 </RelativeLayout>

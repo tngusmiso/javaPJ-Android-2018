@@ -124,6 +124,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btSchedule.setOnClickListener(this);
         btSharing.setOnClickListener(this);
 
+        Button btLogout = findViewById(R.id.btLogout);
+        btLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         // 임의로 액티비티 호출 시점에 어느 프레그먼트를 프레임레이아웃에 띄울 것인지를 정함
         callFragment(FRAG_HOME);
 

@@ -38,8 +38,6 @@ public class FragmentMyDuck extends Fragment {
 
         TextView tvDuckName = view.findViewById(R.id.tvDuckName);
         TextView tvFollower = view.findViewById(R.id.tvDuckFollowers);
-        TextView tvMembers = view.findViewById(R.id.tvMembers);
-        TextView tvLine2 = view.findViewById(R.id.tvLine2);
         TextView tvLink = view.findViewById(R.id.tvLink);
 
 
@@ -52,14 +50,6 @@ public class FragmentMyDuck extends Fragment {
         if(duckInfo.get("link")==null||duckInfo.get("link").equals("null"))
             tvLink.setText("");
         else tvLink.setText(duckInfo.get("link"));
-
-        if(duckInfo.get("type").equals("0")){
-            tvMembers.setVisibility(View.VISIBLE);
-            tvLine2.setVisibility(View.VISIBLE);
-        }else{
-            tvMembers.setVisibility(View.GONE);
-            tvLine2.setVisibility(View.GONE);
-        }
 
         ivDuckPic = view.findViewById(R.id.ivDuckPic);
         Log.d("",MainActivity.getDuckInfo().get("pic"));
