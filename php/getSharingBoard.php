@@ -1,10 +1,14 @@
 <?php
 
     $Duck = $_GET['DUCK']; 
+    $Num = $_GET['NUM']; 
 
    require_once('dbcon.php');
 
-    $sql="SELECT * FROM SHARING_BOARD WHERE b_dno='$Duck'";
+    if($Num=="")
+        $sql="SELECT * FROM SHARING_BOARD WHERE b_dno='$Duck'";
+    else
+        $sql="SELECT * FROM SHARING_BOARD WHERE b_no='$Num'";
     
     $res=mysqli_query($con,$sql);
 

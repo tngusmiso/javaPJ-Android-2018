@@ -119,7 +119,7 @@ public class FragmentHome extends Fragment {
                     final String duck = MainActivity.getDuckInfo().get("duck");
                     final String like = jsonObject.getString("like");
 
-                    arrayList_schedule.add(new ScheduleItem(0,startMonth, startDate, startTime,endTime,string,location,duck,like));
+                    arrayList_schedule.add(new ScheduleItem(0,startMonth, startDate, startTime,endTime,string,location,duck,like,null));
 
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {

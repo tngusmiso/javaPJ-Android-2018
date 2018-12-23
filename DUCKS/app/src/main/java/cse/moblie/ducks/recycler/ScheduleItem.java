@@ -15,8 +15,9 @@ public class ScheduleItem {
 
     String duck;
     String comments;
+    String no;
 
-    public ScheduleItem(int Type, String month, String date, String startTime, String endTime, String title, String address, String duck, String comments) {
+    public ScheduleItem(int Type, String month, String date, String startTime, String endTime, String title, String address, String duck, String comments, String no) {
         this.Type = Type;
         this.month = month;
         this.date = date;
@@ -26,6 +27,7 @@ public class ScheduleItem {
         this.address = address;
         this.duck = duck;
         this.comments = comments;
+        this.no = no;
     }
 
 
@@ -76,5 +78,9 @@ public class ScheduleItem {
     public String getComments() {return comments;}
 
     public void setComments(String comments) { this.comments = comments;}
+
+    public String getNo() {return no;}
+
+    public void setNo(String no) { this.no = no;}
 
 }

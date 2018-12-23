@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import cse.moblie.ducks.MainActivity;
 import cse.moblie.ducks.R;
 
 public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

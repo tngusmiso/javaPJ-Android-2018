@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,6 +81,8 @@ public class FragmentSharing extends Fragment {
             public void onItemClick(View view, int position) {
 
                 Intent intent = new Intent(getActivity(),CommentActivity.class);
+                intent.putExtra("Num", arrayList_sharing.get(position).getNo());
+                intent.putExtra("Origin", arrayList_sharing.get(position).getNo());
                 intent.putExtra("Duck", arrayList_sharing.get(position).getDuck());
                 intent.putExtra("Title", arrayList_sharing.get(position).getTitle());
                 intent.putExtra("Due", arrayList_sharing.get(position).getEndTime());
@@ -89,6 +92,7 @@ public class FragmentSharing extends Fragment {
                 intent.putExtra("WrittenTime", arrayList_sharing.get(position).getStartTime());
 
                 startActivityForResult(intent,REUQUEST_COMMENT);
+                Toast.makeText(getActivity(),"글번호:"+arrayList_sharing.get(position).getNo(),Toast.LENGTH_LONG).show();
             }
         });
 
@@ -159,7 +163,8 @@ public class FragmentSharing extends Fragment {
                     final String content = jsonObject.getString("content");
                     final String duck = MainActivity.getDuckInfo().get("name");
                     final String comments = jsonObject.getString("comment");
-                    arrayList_sharing.add(new ScheduleItem(1, writer, writtenDate, writtenTime, dueDate, title, content, duck, comments));
+                    final String num = jsonObject.getString("num");
+                    arrayList_sharing.add(new ScheduleItem(1, writer, writtenDate, writtenTime, dueDate, title, content, duck, comments,num));
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {
                         @Override
