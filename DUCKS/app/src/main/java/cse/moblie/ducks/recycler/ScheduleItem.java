@@ -1,7 +1,5 @@
 package cse.moblie.ducks.recycler;
 
-import android.graphics.Bitmap;
-
 public class ScheduleItem {
 
     int Type;

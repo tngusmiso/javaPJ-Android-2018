@@ -22,7 +22,7 @@ public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Button btComment;
     private OnItemClickListener onItemClickListener;
 
-    public CardAdapter(ArrayList<ScheduleItem> arrayList,OnItemClickListener onItemClickListener) {
+    public CardAdapter(ArrayList<ScheduleItem> arrayList, OnItemClickListener onItemClickListener) {
         this.arrayList = arrayList;
         this.onItemClickListener = onItemClickListener;
     }
@@ -30,21 +30,22 @@ public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public interface OnItemClickListener {
         public void onItemClick(View view, int position);
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         RecyclerView.ViewHolder viewHolder;
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
 
         switch (viewType) {
-            case 0 :
+            case 0:
                 View v1 = inflater.inflate(R.layout.schedule_cardview, viewGroup, false);
                 viewHolder = new ScheduleViewHolder(v1);
                 break;
-            case 1 :
+            case 1:
                 View v2 = inflater.inflate(R.layout.sharing_cardview, viewGroup, false);
                 viewHolder = new SharingViewHolder(v2);
                 break;
-            case 2 :
+            case 2:
                 View v3 = inflater.inflate(R.layout.comment_view, viewGroup, false);
                 viewHolder = new CommentViewHolder(v3);
                 break;
@@ -103,15 +104,16 @@ public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     private void configureSharingViewHolder(SharingViewHolder vh, int position) {
-        vh.writer.setText("작성자 : "+arrayList.get(position).getMonth());
+        vh.writer.setText("작성자 : " + arrayList.get(position).getMonth());
         vh.writtenDate.setText(arrayList.get(position).getDate());
         vh.writtenTime.setText(arrayList.get(position).getStartTime());
-        vh.dueTime.setText("마감일 : "+ arrayList.get(position).getEndTime());
+        vh.dueTime.setText("마감일 : " + arrayList.get(position).getEndTime());
         vh.title.setText(arrayList.get(position).getTitle());
         vh.content.setText(arrayList.get(position).getAddress());
         vh.duck.setText(arrayList.get(position).getDuck());
-        vh.comments.setText("댓글보기("+arrayList.get(position).getComments()+")");
+        vh.comments.setText("댓글보기(" + arrayList.get(position).getComments() + ")");
     }
+
     private void configureCommentViewHolder(CommentViewHolder vh, int position) {
         vh.tvWriter.setText(arrayList.get(position).getMonth());
         vh.tvComment.setText(arrayList.get(position).getDate());
@@ -131,12 +133,12 @@ public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public ScheduleViewHolder(View view) {
             super(view);
 
-            month=(TextView)view.findViewById(R.id.tvMonth);
-            date=(TextView)view.findViewById(R.id.tvDate);
-            startTime=(TextView)view.findViewById(R.id.tvStartTime);
-            endTime=(TextView)view.findViewById(R.id.tvEndTime);
-            title=(TextView)view.findViewById(R.id.tvSchedule);
-            address=(TextView)view.findViewById(R.id.tvAddress);
+            month = (TextView) view.findViewById(R.id.tvMonth);
+            date = (TextView) view.findViewById(R.id.tvDate);
+            startTime = (TextView) view.findViewById(R.id.tvStartTime);
+            endTime = (TextView) view.findViewById(R.id.tvEndTime);
+            title = (TextView) view.findViewById(R.id.tvSchedule);
+            address = (TextView) view.findViewById(R.id.tvAddress);
         }
     }
 
@@ -153,14 +155,14 @@ public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public SharingViewHolder(View view) {
             super(view);
 
-            writer=(TextView)view.findViewById(R.id.tvWriter);
-            writtenDate=(TextView)view.findViewById(R.id.tvWrittenDate);
-            writtenTime=(TextView)view.findViewById(R.id.tvWrittenTime);
-            dueTime=(TextView)view.findViewById(R.id.tvDueTime);
-            duck = (TextView)view.findViewById(R.id.tvWhichDuck);
-            title=(TextView)view.findViewById(R.id.tvEachTitle);
-            content=(TextView)view.findViewById(R.id.tvEachContent);
-            comments = (Button)view.findViewById(R.id.btComments);
+            writer = (TextView) view.findViewById(R.id.tvWriter);
+            writtenDate = (TextView) view.findViewById(R.id.tvWrittenDate);
+            writtenTime = (TextView) view.findViewById(R.id.tvWrittenTime);
+            dueTime = (TextView) view.findViewById(R.id.tvDueTime);
+            duck = (TextView) view.findViewById(R.id.tvWhichDuck);
+            title = (TextView) view.findViewById(R.id.tvEachTitle);
+            content = (TextView) view.findViewById(R.id.tvEachContent);
+            comments = (Button) view.findViewById(R.id.btComments);
         }
 
         public Button getComments() {
@@ -177,10 +179,10 @@ public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public CommentViewHolder(View view) {
             super(view);
 
-            tvWriter=(TextView)view.findViewById(R.id.tvWriter);
-            tvComment=(TextView)view.findViewById(R.id.tvComment);
-            tvDate=(TextView)view.findViewById(R.id.tvDate);
-            tvTime=(TextView)view.findViewById(R.id.tvTime);
+            tvWriter = (TextView) view.findViewById(R.id.tvWriter);
+            tvComment = (TextView) view.findViewById(R.id.tvComment);
+            tvDate = (TextView) view.findViewById(R.id.tvDate);
+            tvTime = (TextView) view.findViewById(R.id.tvTime);
         }
     }
 }

@@ -35,7 +35,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
         final GetJson httpConn = GetJson.getInstance();
 
         etId = findViewById(R.id.etID);
@@ -75,16 +74,13 @@ public class LoginActivity extends AppCompatActivity {
                             if (!param2[i].equals(""))
                                 list.add(param1[i] + param2[i]);
 
-
                         param1 = list.toArray(new String[list.size()]);
 
                         httpConn.requestWebServer(callback, "login.php", param1);
                     }
                 }.start();
-
             }
         });
-
     }
 
     private final Callback callback = new Callback() {

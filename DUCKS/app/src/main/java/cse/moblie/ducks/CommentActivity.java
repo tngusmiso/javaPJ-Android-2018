@@ -89,8 +89,6 @@ public class CommentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 upload(MainActivity.getUserInfo().get("num"),etComment.getText().toString(), originInfo.get("num"));
-//                arrayList_comment.add(new ScheduleItem(2, MainActivity.getUserInfo().get("name"), etComment.getText().toString(), "날짜", "시간", null, null, null, null, origin));
-//                commentAdapter.notifyDataSetChanged();
                 etComment.setText("");
             }
         });
@@ -188,7 +186,6 @@ public class CommentActivity extends AppCompatActivity {
                             commentAdapter.notifyDataSetChanged();
                         }
                     });
-
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

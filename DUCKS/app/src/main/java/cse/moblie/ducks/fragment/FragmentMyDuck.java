@@ -40,7 +40,6 @@ public class FragmentMyDuck extends Fragment {
         TextView tvFollower = view.findViewById(R.id.tvDuckFollowers);
         TextView tvLink = view.findViewById(R.id.tvLink);
 
-
         HashMap<String, String> userInfo = MainActivity.getUserInfo();
         HashMap<String, String> duckInfo = MainActivity.getDuckInfo();
         HashMap<String, String>[] interestInfo = MainActivity.getInterestInfo();
@@ -55,7 +54,6 @@ public class FragmentMyDuck extends Fragment {
         Log.d("",MainActivity.getDuckInfo().get("pic"));
         if(MainActivity.getDuckInfo().get("pic")!=null||!MainActivity.getDuckInfo().get("pic").equals("NULL"))
             new FragmentMyDuck.downloadPicTask().execute(MainActivity.getDuckInfo().get("pic"));
-
 
         return view;
     }
@@ -83,7 +81,5 @@ public class FragmentMyDuck extends Fragment {
         protected void onPostExecute(Bitmap img){
             ivDuckPic.setImageBitmap(bmImg);
         }
-
     }
-
 }

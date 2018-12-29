@@ -216,7 +216,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-
         // 장르 스피너 불러오기
         new Thread() {
             public void run() {
@@ -276,7 +275,6 @@ public class RegisterActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
     };
 
@@ -426,7 +424,6 @@ public class RegisterActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
     };
 }

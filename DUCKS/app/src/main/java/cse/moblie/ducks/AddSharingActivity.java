@@ -99,7 +99,7 @@ public class AddSharingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (etTitle.getText().toString()==null||etTitle.getText().toString().equals("")) {
+                if (etTitle.getText().toString() == null || etTitle.getText().toString().equals("")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(AddSharingActivity.this);
                     builder.setTitle("제목없음")
                             .setMessage("제목을 입력해주세요.")
@@ -108,7 +108,7 @@ public class AddSharingActivity extends AppCompatActivity {
                     return;
                 }
 
-                if(spinner2.getSelectedItemPosition()==0&&spinner3.getSelectedItemPosition()==0){
+                if (spinner2.getSelectedItemPosition() == 0 && spinner3.getSelectedItemPosition() == 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(AddSharingActivity.this);
                     builder.setTitle("분류 선택")
                             .setMessage("장르와 분류를 선택해주세요.")
@@ -126,24 +126,23 @@ public class AddSharingActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (etContent.getText().toString()==null||etContent.getText().toString().equals("")) {
+                if (etContent.getText().toString() == null || etContent.getText().toString().equals("")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(AddSharingActivity.this);
                     builder.setTitle("내용 없음")
-                        .setMessage("내용이 없습니다. 그대로 업로드 하시겠습니까?")
-                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Upload(writerNum, (spinner3.getSelectedItemPosition()==0)?duckMap.get(spinner2.getSelectedItem()+""):duck2Map.get(spinner3.getSelectedItem()+"")
-                                        , etTitle.getText().toString(), etContent.getText().toString(), btDueDate.getText().toString());
-                            }
-                        })
-                        .setNegativeButton("취소", null )
-                        .show();
+                            .setMessage("내용이 없습니다. 그대로 업로드 하시겠습니까?")
+                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Upload(writerNum, (spinner3.getSelectedItemPosition() == 0) ? duckMap.get(spinner2.getSelectedItem() + "") : duck2Map.get(spinner3.getSelectedItem() + "")
+                                            , etTitle.getText().toString(), etContent.getText().toString(), btDueDate.getText().toString());
+                                }
+                            })
+                            .setNegativeButton("취소", null)
+                            .show();
                     return;
-                }
-
-                else Upload(writerNum, (spinner3.getSelectedItemPosition()==0)?duckMap.get(spinner2.getSelectedItem()+""):duck2Map.get(spinner3.getSelectedItem()+"")
-                        , etTitle.getText().toString(), etContent.getText().toString(), btDueDate.getText().toString());
+                } else
+                    Upload(writerNum, (spinner3.getSelectedItemPosition() == 0) ? duckMap.get(spinner2.getSelectedItem() + "") : duck2Map.get(spinner3.getSelectedItem() + "")
+                            , etTitle.getText().toString(), etContent.getText().toString(), btDueDate.getText().toString());
             }
         });
 
@@ -191,6 +190,7 @@ public class AddSharingActivity extends AppCompatActivity {
                 }.start();
                 spinner2.setSelection(0);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -218,7 +218,7 @@ public class AddSharingActivity extends AppCompatActivity {
         });
     }
 
-    private void Upload(final String... param2){
+    private void Upload(final String... param2) {
         final GetJson httpConn = GetJson.getInstance();
         new Thread() {
             public void run() {
@@ -263,7 +263,7 @@ public class AddSharingActivity extends AppCompatActivity {
                             finish();
                         }
                     });
-                } else{
+                } else {
                     Handler handler = new Handler(Looper.getMainLooper());
 
                     handler.post(new Runnable() {
@@ -312,8 +312,6 @@ public class AddSharingActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
         }
     };
 

@@ -56,7 +56,6 @@ public class FragmentSchedule extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -96,7 +95,6 @@ public class FragmentSchedule extends Fragment {
         mRecycler_schedule.setHasFixedSize(true);
 
         mLayoutManager_schedule = new LinearLayoutManager(getContext());
-        //((LinearLayoutManager) mLayoutManager_schedule).setOrientation(LinearLayout.HORIZONTAL);
         mRecycler_schedule.setLayoutManager(mLayoutManager_schedule);
 
         scheduleAdapter = new CardAdapter(arrayList_schedule,null);

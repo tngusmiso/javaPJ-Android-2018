@@ -105,7 +105,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     rlTopMenu.setVisibility(View.GONE);
                     btMenu.setBackgroundResource(R.drawable.down);
                 }
-
             }
 
             ;
@@ -326,8 +325,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
         }
     };
 

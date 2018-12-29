@@ -48,17 +48,22 @@ public class FragmentSharing extends Fragment {
     ArrayList<ScheduleItem> arrayList_sharing = new ArrayList<>();
     private CardAdapter sharingAdapter;
 
-
     public FragmentSharing() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sharing_fragment, container, false);
 
         Button btAdd = view.findViewById(R.id.btAdd);
+
+        mRecycler_sharing = view.findViewById(R.id.rvSharing);
+        mRecycler_sharing.setHasFixedSize(true);
+
+        mLayoutManager_sharing = new LinearLayoutManager(getContext());
+        //((LinearLayoutManager) mLayoutManager_schedule).setOrientation(LinearLayout.HORIZONTAL);
+        mRecycler_sharing.setLayoutManager(mLayoutManager_sharing);
 
         btAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,13 +73,6 @@ public class FragmentSharing extends Fragment {
                 startActivityForResult(intent, REQUEST_ADDSHR);
             }
         });
-
-        mRecycler_sharing = view.findViewById(R.id.rvSharing);
-        mRecycler_sharing.setHasFixedSize(true);
-
-        mLayoutManager_sharing = new LinearLayoutManager(getContext());
-        //((LinearLayoutManager) mLayoutManager_schedule).setOrientation(LinearLayout.HORIZONTAL);
-        mRecycler_sharing.setLayoutManager(mLayoutManager_sharing);
 
         sharingAdapter = new CardAdapter(arrayList_sharing,new CardAdapter.OnItemClickListener() {
             @Override
@@ -92,7 +90,6 @@ public class FragmentSharing extends Fragment {
                 intent.putExtra("WrittenTime", arrayList_sharing.get(position).getStartTime());
 
                 startActivityForResult(intent,REUQUEST_COMMENT);
-                Toast.makeText(getActivity(),"글번호:"+arrayList_sharing.get(position).getNo(),Toast.LENGTH_LONG).show();
             }
         });
 
