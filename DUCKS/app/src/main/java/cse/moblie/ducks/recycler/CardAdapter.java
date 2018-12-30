@@ -1,26 +1,54 @@
 package cse.moblie.ducks.recycler;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
+import cse.moblie.ducks.LoginActivity;
 import cse.moblie.ducks.MainActivity;
 import cse.moblie.ducks.R;
+import cse.moblie.ducks.fragment.FragmentSharing;
+import cse.moblie.ducks.request.GetJson;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+
+import static android.content.ContentValues.TAG;
 
 public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private ArrayList<ScheduleItem> arrayList;
     private Button btComment;
     private OnItemClickListener onItemClickListener;
+
+    final int DELETE_MENU = 0;
+    final int EDIT_MENU = 1;
+
+    int adapterPosition;
+
 
     public CardAdapter(ArrayList<ScheduleItem> arrayList, OnItemClickListener onItemClickListener) {
         this.arrayList = arrayList;
@@ -121,7 +149,6 @@ public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         vh.tvTime.setText(arrayList.get(position).getEndTime());
     }
 
-
     private class ScheduleViewHolder extends RecyclerView.ViewHolder {
         TextView month;
         TextView date;
@@ -142,7 +169,7 @@ public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    private class SharingViewHolder extends RecyclerView.ViewHolder {
+    private class SharingViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         TextView writer;
         TextView writtenDate;
         TextView writtenTime;
@@ -163,11 +190,48 @@ public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             title = (TextView) view.findViewById(R.id.tvEachTitle);
             content = (TextView) view.findViewById(R.id.tvEachContent);
             comments = (Button) view.findViewById(R.id.btComments);
+
+            view.setOnCreateContextMenuListener(this);
         }
 
         public Button getComments() {
             return comments;
         }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v,
+                                        ContextMenu.ContextMenuInfo menuInfo) {
+
+            MenuItem Delete = menu.add(0, DELETE_MENU, 0, "삭제");//groupId, itemId, order, title
+            MenuItem Edit = menu.add(0, EDIT_MENU, 0, "수정");
+
+            Delete.setOnMenuItemClickListener(onEditMenu);
+            Edit.setOnMenuItemClickListener(onEditMenu);
+        }
+
+        private final MenuItem.OnMenuItemClickListener onEditMenu = new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case DELETE_MENU:
+                        adapterPosition = getAdapterPosition();
+                        final String num = arrayList.get(adapterPosition).getNo();
+                        final GetJson httpConn = GetJson.getInstance();
+                        new Thread() {
+                            public void run() {
+                                httpConn.requestWebServer(deleteSharingCallback, "deleteSharing.php", "NUM=" + num);
+                            }
+                        }.start();
+
+                        break;
+
+                    case EDIT_MENU:
+                        break;
+                }
+                return true;
+            }
+        };
     }
 
     private class CommentViewHolder extends RecyclerView.ViewHolder {
@@ -185,4 +249,35 @@ public class CardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             tvTime = (TextView) view.findViewById(R.id.tvTime);
         }
     }
+
+    public final Callback deleteSharingCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            Log.d(TAG, "콜백오류:" + e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String body = response.body().string();
+            Log.d(TAG, "서버에서 응답한 Body:" + body);
+            try {
+                JSONObject jsonObject = new JSONObject(body);
+
+                if (jsonObject.getString("result").equals("100")) {
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            arrayList.remove(adapterPosition);
+                            notifyItemRemoved(adapterPosition);
+                            notifyItemRangeChanged(adapterPosition, arrayList.size());
+                        }
+                    });
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    };
 }

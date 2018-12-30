@@ -9,9 +9,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -37,6 +41,7 @@ import okhttp3.Response;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
+import static android.content.ContentValues.TAG;
 
 public class FragmentSharing extends Fragment {
 
@@ -74,11 +79,11 @@ public class FragmentSharing extends Fragment {
             }
         });
 
-        sharingAdapter = new CardAdapter(arrayList_sharing,new CardAdapter.OnItemClickListener() {
+        sharingAdapter = new CardAdapter(arrayList_sharing, new CardAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 
-                Intent intent = new Intent(getActivity(),CommentActivity.class);
+                Intent intent = new Intent(getActivity(), CommentActivity.class);
                 intent.putExtra("Num", arrayList_sharing.get(position).getNo());
                 intent.putExtra("Origin", arrayList_sharing.get(position).getNo());
                 intent.putExtra("Duck", arrayList_sharing.get(position).getDuck());
@@ -89,7 +94,7 @@ public class FragmentSharing extends Fragment {
                 intent.putExtra("WrittenDate", arrayList_sharing.get(position).getDate());
                 intent.putExtra("WrittenTime", arrayList_sharing.get(position).getStartTime());
 
-                startActivityForResult(intent,REUQUEST_COMMENT);
+                startActivityForResult(intent, REUQUEST_COMMENT);
             }
         });
 
@@ -122,7 +127,7 @@ public class FragmentSharing extends Fragment {
                 }
                 break;
             case REUQUEST_COMMENT:
-                if(requestCode == RESULT_CANCELED){
+                if (requestCode == RESULT_CANCELED) {
                     final GetJson httpConn = GetJson.getInstance();
                     new Thread() {
                         public void run() {
@@ -136,7 +141,7 @@ public class FragmentSharing extends Fragment {
         }
     }
 
-    private final Callback getBoardCallback = new Callback() {
+    public final Callback getBoardCallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
             Log.d("Board", "콜백오류:" + e.getMessage());
@@ -161,7 +166,7 @@ public class FragmentSharing extends Fragment {
                     final String duck = MainActivity.getDuckInfo().get("name");
                     final String comments = jsonObject.getString("comment");
                     final String num = jsonObject.getString("num");
-                    arrayList_sharing.add(new ScheduleItem(1, writer, writtenDate, writtenTime, dueDate, title, content, duck, comments,num));
+                    arrayList_sharing.add(new ScheduleItem(1, writer, writtenDate, writtenTime, dueDate, title, content, duck, comments, num));
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {
                         @Override
@@ -176,5 +181,4 @@ public class FragmentSharing extends Fragment {
             }
         }
     };
-
 }
